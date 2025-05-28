@@ -1,0 +1,174 @@
+/* Dark Mode Styles */
+:root {
+    --dark-bg: #121212;
+    --dark-surface: #1e1e1e;
+    --dark-surface-light: #2d2d2d;
+    --dark-text: #e0e0e0;
+    --dark-text-secondary: #aaaaaa;
+    --dark-border: #333333;
+    --dark-primary: #4dabf7;
+    --dark-primary-dark: #339af0;
+    --dark-accent: #ff6b6b;
+}
+
+body.dark-mode {
+    background-color: var(--dark-bg);
+    color: var(--dark-text);
+}
+
+/* Navigation */
+body.dark-mode .navbar {
+    background-color: var(--dark-surface);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .logo-text {
+    color: var(--dark-text);
+}
+
+body.dark-mode .nav-link {
+    color: var(--dark-text-secondary);
+}
+
+body.dark-mode .nav-link:hover,
+body.dark-mode .nav-link.active {
+    color: var(--dark-primary);
+}
+
+body.dark-mode #theme-toggle {
+    color: var(--dark-primary);
+    border-color: var(--dark-primary);
+}
+
+body.dark-mode #theme-toggle:hover {
+    color: white;
+}
+
+/* Sections */
+body.dark-mode .section-title {
+    color: var(--dark-text);
+}
+
+body.dark-mode .section-subtitle {
+    color: var(--dark-text-secondary);
+}
+
+body.dark-mode .bg-light {
+    background-color: var(--dark-surface) !important;
+}
+
+/* Cards */
+body.dark-mode .project-card,
+body.dark-mode .cert-card,
+body.dark-mode .skill-card,
+body.dark-mode .timeline-item,
+body.dark-mode .education-item {
+    background-color: var(--dark-surface-light);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .project-content h3,
+body.dark-mode .cert-body h3,
+body.dark-mode .skill-card h3,
+body.dark-mode .timeline-content h3,
+body.dark-mode .education-item h3 {
+    color: var(--dark-text);
+}
+
+body.dark-mode .project-content p,
+body.dark-mode .cert-body p,
+body.dark-mode .skill-card p {
+    color: var(--dark-text-secondary);
+}
+
+body.dark-mode .project-tags span {
+    background-color: rgba(77, 171, 247, 0.15);
+    color: var(--dark-primary);
+}
+
+/* Timeline */
+body.dark-mode .timeline::before {
+    background-color: var(--dark-primary);
+}
+
+body.dark-mode .timeline-content h4,
+body.dark-mode .education-item h4 {
+    color: var(--dark-text-secondary);
+}
+
+/* Forms */
+body.dark-mode .form-control {
+    background-color: var(--dark-surface);
+    border-color: var(--dark-border);
+    color: var(--dark-text);
+}
+
+body.dark-mode .form-control:focus {
+    background-color: var(--dark-surface-light);
+    border-color: var(--dark-primary);
+    color: var(--dark-text);
+}
+
+body.dark-mode .form-control::placeholder {
+    color: var(--dark-text-secondary);
+}
+
+/* Modals */
+body.dark-mode .modal-content {
+    background-color: var(--dark-surface);
+}
+
+body.dark-mode .modal-header,
+body.dark-mode .modal-footer {
+    background-color: var(--dark-surface-light) !important;
+    border-color: var(--dark-border);
+}
+
+body.dark-mode .modal-title {
+    color: var(--dark-text);
+}
+
+body.dark-mode .text-secondary {
+    color: var(--dark-text-secondary) !important;
+}
+
+body.dark-mode .text-muted {
+    color: var(--dark-text-secondary) !important;
+}
+
+/* Footer */
+body.dark-mode .footer {
+    background-color: var(--dark-surface-light);
+}
+
+body.dark-mode .footer-copy {
+    color: var(--dark-text-secondary);
+}
+
+/* Back to Top Button */
+body.dark-mode .back-to-top {
+    background-color: var(--dark-primary);
+}
+
+body.dark-mode .back-to-top:hover {
+    background-color: var(--dark-primary-dark);
+}
+
+/* Buttons */
+body.dark-mode .btn-outline-primary {
+    color: var(--dark-primary);
+    border-color: var(--dark-primary);
+}
+
+body.dark-mode .btn-outline-primary:hover {
+    background-color: var(--dark-primary);
+    color: var(--dark-bg);
+}
+
+/* Transitions */
+body.dark-mode,
+body.dark-mode *,
+body.light-mode,
+body.light-mode * {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}

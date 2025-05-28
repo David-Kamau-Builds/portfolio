@@ -6,6 +6,35 @@ document.addEventListener("DOMContentLoaded", function () {
   const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
     return new bootstrap.Tooltip(tooltipTriggerEl);
   });
+  
+  // Backend project animation
+  const animateBackendProjects = () => {
+    const backendProjects = document.querySelectorAll('.backend-project');
+    
+    if (backendProjects.length === 0) return;
+    
+    // Add hover effects for backend projects
+    backendProjects.forEach(project => {
+      const diagramItems = project.querySelectorAll('.diagram-item');
+      
+      project.addEventListener('mouseenter', () => {
+        diagramItems.forEach((item, index) => {
+          setTimeout(() => {
+            item.style.transform = 'scale(1.2)';
+          }, index * 150);
+        });
+      });
+      
+      project.addEventListener('mouseleave', () => {
+        diagramItems.forEach(item => {
+          item.style.transform = 'scale(1)';
+        });
+      });
+    });
+  };
+  
+  // Initialize backend project animations
+  animateBackendProjects();
 
   // Navbar scroll effect
   const navbar = document.querySelector(".navbar");
