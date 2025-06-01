@@ -62,7 +62,8 @@ body.dark-mode .project-card,
 body.dark-mode .cert-card,
 body.dark-mode .skill-card,
 body.dark-mode .timeline-item,
-body.dark-mode .education-item {
+body.dark-mode .education-item,
+body.dark-mode .blog-card {
     background-color: var(--dark-surface-light);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
@@ -71,14 +72,32 @@ body.dark-mode .project-content h3,
 body.dark-mode .cert-body h3,
 body.dark-mode .skill-card h3,
 body.dark-mode .timeline-content h3,
-body.dark-mode .education-item h3 {
+body.dark-mode .education-item h3,
+body.dark-mode .blog-title a {
     color: var(--dark-text);
 }
 
 body.dark-mode .project-content p,
 body.dark-mode .cert-body p,
-body.dark-mode .skill-card p {
+body.dark-mode .skill-card p,
+body.dark-mode .blog-excerpt {
     color: var(--dark-text-secondary);
+}
+
+body.dark-mode .blog-meta {
+    color: var(--dark-text-secondary);
+}
+
+body.dark-mode .blog-category {
+    color: var(--dark-primary);
+}
+
+body.dark-mode .blog-title a:hover {
+    color: var(--dark-primary);
+}
+
+body.dark-mode .blog-card:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
 }
 
 body.dark-mode .project-tags span {
