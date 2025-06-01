@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/dark-mode.css" id="theme-stylesheet" disabled>
     <link rel="stylesheet" href="css/theme-toggle.css">
+    <link rel="stylesheet" href="css/blog-enhancements.css">
     <!-- Enhanced SEO Meta Tags -->
     <meta name="description"
         content="David Washington Kamau - AWS Certified Full Stack Developer & Cloud Architect specializing in Laravel, React, Node.js, and AWS cloud solutions. Professional web developer available for hire.">
@@ -104,7 +105,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-            <a class="navbar-brand">
+            <a class="navbar-brand" href="#hero" title="Go to homepage">
                 <img src="images/my_logo.webp" alt="David Washington Kamau Logo" class="logo-img">
                 <span class="logo-text">David Washington Kamau</span>
             </a>
@@ -114,12 +115,12 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto gap-0 gap-lg-3">
-                    <li class="nav-item"><a class="nav-link" href="#hero">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
                     <li class="nav-item"><a class="nav-link" href="#work">Experience</a></li>
                     <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
                     <li class="nav-item"><a class="nav-link" href="#certifications">Certifications</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#blog">Blogs</a></li>
                     <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contacts</a></li>
 
@@ -133,7 +134,7 @@
         <div class="container">
             <div class="hero-content">
                 <h1 class="hero-title">David Washington Kamau</h1>
-                <h2 class="hero-subtitle">Full Stack Web Developer | Cloud Practitioner</h2>
+                <h2 class="hero-subtitle">Software Developer | Cloud Architect</h2>
                 <p class="hero-text">Building scalable web solutions with a focus on user experience and cloud
                     technologies</p>
                 <div class="hero-cta">
@@ -201,15 +202,14 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="about-content">
-                        <p class="lead"><strong>Full-Stack Developer</strong> building web solutions that convert clicks
+                        <p class="lead"><strong>Software Developer</strong> building solutions that convert clicks
                             into value. Proficient
-                            in <strong>HTML/CSS, JavaScript, Laravel, MySQL, Node.js, Express.Js, Postman, Python,
+                            in <strong>Reactive Java, HTML/CSS, JavaScript, PHP(Laravel), MySQL, Node.js, Express.Js, Postman, Python,
                                 React</strong> and <strong>AWS Cloud</strong>
                             architecture.</p>
 
                         <p>I craft <strong>user-first experiences</strong> with clean code and scalable backends.
-                            Currently developing a
-                            <strong>travel platform for Kenya</strong> while exploring <strong>blockchain for public
+                            Currently exploring <strong>blockchain for public
                                 services</strong>.
                         </p>
 
@@ -281,8 +281,8 @@
                     </div>
                 </div>
 
-
                 <!-- Project 2:  -->
+                
             </div>
         </div>
     </section>
@@ -296,6 +296,26 @@
             </div>
 
             <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>IT Support Specialist</h3>
+                        <h4>Ecotrails Tours and Safaris</h4>
+                        <h4>09/2024 - 04/2025</h4>
+                        <ul>
+                            <li>Developed <strong>responsive, database-driven websites</strong> using HTML, CSS,
+                                JavaScript, Laravel, and MySQL</li>
+                            <li>Designed <strong>information retrieval systems</strong> improving data accessibility and
+                                searchability</li>
+                            <li>Implemented <strong>data security measures</strong> including encryption and access
+                                control</li>
+                            <li>Optimized <strong>database performance</strong>, reducing load times and improving UX
+                            </li>
+                            <li>Conducted <strong>UX research and usability testing</strong> to enhance website
+                                navigation</li>
+                        </ul>
+                    </div>
+                </div>
+
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <h3>ICT Trainee</h3>
@@ -312,26 +332,6 @@
                                 enhancing accessibility</li>
                             <li>Provided <strong>technical support and training</strong>, leading to <strong>20%
                                     improvement</strong> in system adoption</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h3>IT Support Specialist</h3>
-                        <h4>Ecotrails Tours and Safaris</h4>
-                        <h4>09/2024 - Present</h4>
-                        <ul>
-                            <li>Developed <strong>responsive, database-driven websites</strong> using HTML, CSS,
-                                JavaScript, Laravel, and MySQL</li>
-                            <li>Designed <strong>information retrieval systems</strong> improving data accessibility and
-                                searchability</li>
-                            <li>Implemented <strong>data security measures</strong> including encryption and access
-                                control</li>
-                            <li>Optimized <strong>database performance</strong>, reducing load times and improving UX
-                            </li>
-                            <li>Conducted <strong>UX research and usability testing</strong> to enhance website
-                                navigation</li>
                         </ul>
                     </div>
                 </div>
@@ -529,8 +529,54 @@
         </div>
     </div>
 
+    <!-- Blog Section -->
+    <section id="blog" class="blog-section section-padding bg-light">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Latest Blog Posts</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <!-- Featured Blog Post -->
+            <div class="row mt-5">
+                <div class="col-lg-8 mx-auto">
+                    <div class="blog-card featured-blog">
+                        <div class="blog-content">
+                            <div class="featured-tag">Featured Article</div>
+                            <div class="blog-meta">
+                                <span class="blog-date"><i class="fas fa-calendar-alt me-1"></i> May 2025</span>
+                                <span class="blog-category"><i class="fas fa-tag me-1"></i> Cloud Architecture</span>
+                            </div>
+                            <h3 class="blog-title">
+                                <a href="https://medium.com/@davidwashingtonkamau/step-by-step-guide-to-setting-up-terraform-aws-cli-and-your-aws-environment-79b08136fb78" target="_blank" rel="noopener noreferrer">
+                                    Step by Step Guide to Setting Up Terraform, AWS CLI, and Your AWS Environment
+                                </a>
+                            </h3>
+                            <p class="blog-excerpt">
+                                Ready to launch into the cloud? This hands-on guide makes setting up 
+                                Terraform, AWS CLI, and your AWS environment on
+                                Windows as simple as ABC. Whether you're new or leveling up, 
+                                get set to build, automate, and deploy like a pro - fast!
+                            </p>
+                            <a href="https://medium.com/@davidwashingtonkamau/step-by-step-guide-to-setting-up-terraform-aws-cli-and-your-aws-environment-79b08136fb78" class="btn btn-primary btn-sm" target="_blank" rel="noopener noreferrer">
+                                Read Featured Article <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- View All Posts Button -->
+            <div class="text-center mt-4">
+                <a href="https://medium.com/@davidwashingtonkamau" class="btn btn-outline-primary" target="_blank" rel="noopener noreferrer">
+                    View All Blog Posts <i class="fas fa-external-link-alt ms-1"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Skills Section -->
-    <section id="skills" class="skills-section section-padding bg-light">
+    <section id="skills" class="skills-section section-padding">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Core Competencies</h2>
@@ -553,7 +599,7 @@
                         <div class="skill-icon">
                             <i class="fas fa-code"></i>
                         </div>
-                        <h3>Sofware Development</h3>
+                        <h3>Software Development</h3>
                         <p>Java - Spring boot - WebFlux, HTML/CSS, JavaScript, Laravel, MySQL, Node.js, Express.Js</p>
                     </div>
                 </div>
