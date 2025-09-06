@@ -3,34 +3,6 @@
     padding: 5rem 0;
 }
 
-/* Carousel Controls */
-#blogCarousel .carousel-control-prev,
-#blogCarousel .carousel-control-next {
-    width: 40px;
-    height: 40px;
-    background-color: var(--primary-color);
-    border-radius: 50%;
-    opacity: 0.8;
-    top: 50%;
-    transform: translateY(-50%);
-    transition: all 0.3s ease;
-}
-
-#blogCarousel .carousel-control-prev {
-    left: -20px;
-}
-
-#blogCarousel .carousel-control-next {
-    right: -20px;
-}
-
-#blogCarousel .carousel-control-prev:hover,
-#blogCarousel .carousel-control-next:hover {
-    opacity: 1;
-    background-color: var(--primary-dark);
-    transform: translateY(-50%) scale(1.1);
-}
-
 /* Blog Card Enhancements */
 .blog-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -56,7 +28,7 @@
     color: var(--text-light);
 }
 
-.blog-date i, 
+.blog-date i,
 .blog-category i {
     color: var(--primary-color);
 }
@@ -118,41 +90,22 @@
     box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
 }
 
-/* Carousel Indicators */
-#blogCarousel .carousel-indicators {
-    bottom: -40px;
-}
 
-#blogCarousel .carousel-indicators button {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: var(--primary-color);
-    opacity: 0.5;
-    margin: 0 5px;
-    transition: all 0.3s ease;
-}
-
-#blogCarousel .carousel-indicators button.active {
-    opacity: 1;
-    transform: scale(1.2);
-    background-color: var(--primary-dark);
-}
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
     .blog-carousel-container {
         padding: 0 30px;
     }
-    
+
     #blogCarousel .carousel-control-prev {
         left: -15px;
     }
-    
+
     #blogCarousel .carousel-control-next {
         right: -15px;
     }
-    
+
     .featured-blog {
         margin-top: 2rem;
     }
@@ -162,11 +115,11 @@
     .blog-carousel-container {
         padding: 0 20px;
     }
-    
+
     .blog-content {
         padding: 1rem;
     }
-    
+
     .featured-tag {
         padding: 0.3rem 0.8rem;
         font-size: 0.7rem;

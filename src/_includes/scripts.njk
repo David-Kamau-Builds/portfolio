@@ -1,0 +1,57 @@
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://kit.fontawesome.com/d9dd6b60aa.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/error-boundary.js"></script>
+<script src="js/scripts.js"></script>
+<script src="js/form-handler.js"></script>
+<script src="js/theme-toggle.js"></script>
+<script src="js/enhancements.js"></script>
+<script src="js/cert-enhancements.js"></script>
+<script>
+    // Service Worker registration with error handling
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+                .then(registration => {
+                    console.log('Service Worker registered successfully:', registration);
+                })
+                .catch(error => {
+                    console.error('Service Worker registration failed:', error);
+                });
+        });
+    }
+    
+    // Initialize AOS with error handling
+    document.addEventListener('DOMContentLoaded', function() {
+        try {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    duration: 800,
+                    easing: 'ease-in-out',
+                    once: true,
+                    offset: 100
+                });
+            }
+        } catch (error) {
+            console.error('Error initializing AOS:', error);
+        }
+    });
+    
+    // Global error handler
+    window.addEventListener('error', function(e) {
+        console.error('Global error:', {
+            message: e.message,
+            filename: e.filename,
+            lineno: e.lineno,
+            colno: e.colno,
+            error: e.error
+        });
+    });
+    
+    // Unhandled promise rejection handler
+    window.addEventListener('unhandledrejection', function(e) {
+        console.error('Unhandled promise rejection:', e.reason);
+        e.preventDefault(); // Prevent the default browser behavior
+    });
+</script>

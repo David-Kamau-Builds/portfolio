@@ -9,6 +9,7 @@
     --dark-primary: #4dabf7;
     --dark-primary-dark: #339af0;
     --dark-accent: #ff6b6b;
+    --bg-color: var(--dark-bg);
 }
 
 body.dark-mode {
@@ -182,6 +183,91 @@ body.dark-mode .btn-outline-primary {
 body.dark-mode .btn-outline-primary:hover {
     background-color: var(--dark-primary);
     color: var(--dark-bg);
+}
+
+/* Modal Close Button */
+body.dark-mode .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+/* Enhanced Dark Mode Elements */
+body.dark-mode .skill-card {
+    background: rgba(30, 30, 30, 0.9);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .skill-card h3 {
+    color: var(--dark-text);
+}
+
+body.dark-mode .skill-item {
+    color: var(--dark-text-secondary);
+    border-bottom-color: rgba(255,255,255,0.1);
+}
+
+body.dark-mode .skill-item:hover {
+    color: var(--dark-text);
+    background-color: rgba(77, 171, 247, 0.1);
+}
+
+/* Enhanced Certification Cards Dark Mode */
+body.dark-mode .cert-section {
+    background: var(--dark-bg);
+}
+
+
+
+
+
+body.dark-mode .enhanced-cert {
+    background: var(--dark-surface-light);
+    border-color: var(--dark-border);
+}
+
+body.dark-mode .enhanced-cert:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .cert-body h3 {
+    color: var(--dark-text);
+}
+
+body.dark-mode .cert-description {
+    color: var(--dark-text-secondary);
+}
+
+body.dark-mode .meta-item {
+    color: var(--dark-text-secondary);
+}
+
+body.dark-mode .meta-item i {
+    color: var(--dark-primary);
+}
+
+body.dark-mode .verify-btn {
+    background: #28a745;
+    border-color: #28a745;
+    color: white;
+}
+
+body.dark-mode .verify-btn:hover {
+    background: #218838;
+    color: white;
+}
+
+body.dark-mode .verify-btn.disabled {
+    background: #6c757d;
+    border-color: #6c757d;
+}
+
+
+
+body.dark-mode .navbar-collapse {
+    background: var(--dark-surface);
+}
+
+body.dark-mode .nav-link {
+    border-color: var(--dark-border);
 }
 
 /* Transitions */

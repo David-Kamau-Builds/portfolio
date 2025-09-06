@@ -1,0 +1,85 @@
+name: Portfolio CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: |
+        npm install
+
+    - name: Build site
+      run: |
+        npm run build
+
+    - name: HTML Validation
+      run: |
+        npx html-validate _site/index.html --config .htmlvalidate.json || exit 1
+
+    - name: CSS Validation
+      run: |
+        find css/ -name "*.css" -exec npx w3c-css-validator {} \; || exit 1
+
+    - name: JavaScript Linting
+      run: |
+        npx eslint js/*.js --config .eslintrc.json || exit 1
+
+    - name: Link Validation
+      run: |
+        npx blc http://localhost:3000 --recursive --exclude-external || exit 1
+
+    - name: Accessibility Testing
+      run: |
+        node scripts/accessibility-test.js || exit 1
+
+    - name: Performance Testing
+      run: |
+        npx lhci autorun --config .lighthouserc.json || exit 1
+
+    - name: Security Scan
+      run: |
+        node scripts/security-scan.js || exit 1
+
+    - name: Image Optimization Check
+      run: |
+        node scripts/image-check.js || exit 1
+
+    - name: SEO Validation
+      run: |
+        node scripts/seo-check.js || exit 1
+
+  deploy:
+    needs: validate
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Build site
+      run: |
+        npm install
+        npm run build
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./_site

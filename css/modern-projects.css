@@ -1,0 +1,342 @@
+/* Projects Section - Theme Matching */
+
+/* Project Cards */
+.project-card {
+  background: var(--white);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(52, 152, 219, 0.08);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--box-shadow-hover);
+  border-color: rgba(52, 152, 219, 0.2);
+}
+
+/* Project Header */
+.project-header {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  padding: 1rem 1.5rem;
+  text-align: center;
+}
+
+.project-category {
+  color: var(--white);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Project Image */
+.project-image {
+  position: relative;
+  height: 160px;
+  background: var(--light-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+/* Technology Logos */
+.tech-logos {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.tech-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  transition: var(--transition);
+}
+
+.tech-logo:hover {
+  transform: translateY(-3px);
+}
+
+.tech-logo i {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  transition: var(--transition);
+}
+
+.tech-logo span {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-color);
+  text-align: center;
+}
+
+.tech-logo:hover i {
+  color: var(--primary-dark);
+  transform: scale(1.1);
+}
+
+
+
+/* Project Content */
+.project-content {
+  padding: 2rem 2rem 2.25rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-content h3 {
+  color: var(--dark-color);
+  font-size: 1.45rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  font-family: var(--font-primary);
+  line-height: 1.3;
+}
+
+.project-content p {
+  color: var(--text-light);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  flex: 1;
+  font-size: 0.98rem;
+}
+
+/* Project Tags */
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.75rem;
+}
+
+.project-tags span {
+  background: var(--light-gray);
+  color: var(--text-light);
+  padding: 0.5rem 1rem;
+  border-radius: 18px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  border: 1px solid #e9ecef;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.project-tags span.tag-primary {
+  background: var(--primary-color);
+  color: var(--white);
+  border-color: var(--primary-color);
+  font-weight: 600;
+}
+
+.project-tags span:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+}
+
+/* Project Links */
+.project-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+.project-links .btn {
+  font-size: 0.87rem;
+  padding: 0.7rem 1.3rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: var(--transition);
+  font-family: var(--font-primary);
+  letter-spacing: 0.2px;
+  min-width: 120px;
+  text-align: center;
+}
+
+.project-links .btn-primary {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: var(--white);
+  box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+}
+
+.project-links .btn-primary:hover {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
+  color: var(--white);
+}
+
+.project-links .btn-outline-primary {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+  background: transparent;
+}
+
+.project-links .btn-outline-primary:hover {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+/* Dropdown Styling */
+.dropdown-menu {
+  border: 1px solid rgba(52, 152, 219, 0.1);
+  box-shadow: var(--box-shadow-hover);
+  border-radius: 8px;
+  padding: 0.5rem 0;
+  margin-top: 0.5rem;
+}
+
+.dropdown-item {
+  padding: 0.7rem 1.2rem;
+  font-weight: 500;
+  transition: var(--transition);
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+.dropdown-item:hover {
+  background: var(--primary-color);
+  color: var(--white);
+  transform: translateX(3px);
+}
+
+.dropdown-item:active {
+  background: var(--primary-dark);
+  color: var(--white);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .project-content {
+    padding: 1.75rem 1.75rem 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .project-content {
+    padding: 1.5rem 1.5rem 1.75rem;
+  }
+  
+  .project-content h3 {
+    font-size: 1.35rem;
+    margin-bottom: 1rem;
+  }
+  
+  .project-links {
+    gap: 0.75rem;
+  }
+  
+  .project-links .btn {
+    min-width: 110px;
+    padding: 0.65rem 1.1rem;
+  }
+  
+  .tech-logos {
+    gap: 1.5rem;
+  }
+  
+  .tech-logo i {
+    font-size: 2.2rem;
+  }
+  
+  .project-header {
+    padding: 0.8rem 1.2rem;
+  }
+  
+  .project-category {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-content {
+    padding: 1.25rem 1.25rem 1.5rem;
+  }
+  
+  .project-content h3 {
+    font-size: 1.25rem;
+  }
+  
+  .project-content p {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .project-image {
+    height: 140px;
+    padding: 1rem;
+  }
+  
+  .tech-logos {
+    gap: 1rem;
+  }
+  
+  .tech-logo i {
+    font-size: 1.8rem;
+  }
+  
+  .tech-logo span {
+    font-size: 0.75rem;
+  }
+  
+  .project-links {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .project-links .btn {
+    width: 100%;
+    min-width: auto;
+  }
+  
+  .project-tags {
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .project-tags span {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+  
+  .project-header {
+    padding: 0.7rem 1rem;
+  }
+  
+  .project-category {
+    font-size: 0.8rem;
+  }
+}

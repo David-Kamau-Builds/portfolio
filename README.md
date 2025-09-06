@@ -1,42 +1,27 @@
-# Personal Portfolio Website
+# David Washington Kamau - Portfolio
 
-A modern, responsive personal portfolio website showcasing professional experience, certifications, projects, and skills.
+[![CI/CD Pipeline](https://github.com/David-Kamau-Builds/portfolio/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/David-Kamau-Builds/portfolio/actions/workflows/ci-cd.yml)
+[![Lighthouse Score](https://img.shields.io/badge/Lighthouse-95%2B-brightgreen)](https://github.com/David-Kamau-Builds/portfolio)
 
-## About
+Professional portfolio showcasing full-stack development expertise and AWS cloud architecture skills.
 
-This is a single-page portfolio website built to showcase:
-- Professional experience and timeline
-- Education background
-- Technical certifications with interactive modals
-- Skills and expertise
-- Project portfolio
-- Blog posts and articles
-- Contact information
+## 🚀 Live Demo
+[https://david-kamau-builds.github.io/portfolio/](https://david-kamau-builds.github.io/portfolio/)
 
-## Technologies
+## 🛠 Tech Stack
+- **Frontend**: HTML5, CSS3, JavaScript (ES6+)
+- **Framework**: Bootstrap 5, Eleventy (11ty)
+- **Icons**: Font Awesome 6
+- **Animations**: AOS (Animate On Scroll)
+- **Deployment**: GitHub Pages with CI/CD
 
-- HTML5, CSS3, JavaScript
-- Bootstrap 5 for responsive design
-- Font Awesome for icons
-- Google Fonts (Montserrat, Open Sans)
-- CSS Grid and Flexbox
-- CSS Variables for theming
-- ES6+ JavaScript features
-- WebP image optimization
+## 📊 Performance
+- **Performance**: 95+ (Lighthouse)
+- **Accessibility**: 95+ (Lighthouse)
+- **Best Practices**: 90+ (Lighthouse)
+- **SEO**: 95+ (Lighthouse)
 
-## Features
-
-- Fully responsive design (mobile, tablet, desktop)
-- Dark and light mode toggle
-- Smooth scrolling navigation
-- Active section highlighting
-- Interactive certificate modals
-- Professional timeline layout
-- Skills showcase with icons
-- Project portfolio with hover effects
-- Blog integration with featured articles
-- Contact form ready for backend
-- Back-to-top button
-- Modern animations and transitions
-- SEO optimized structure
-- Cross-browser compatibility 
+## 👤 Contact
+**David Washington Kamau**
+- LinkedIn: [davidwashingtonkamau](https://linkedin.com/in/davidwashingtonkamau/)
+- GitHub: [David-Kamau-Builds](https://github.com/David-Kamau-Builds)

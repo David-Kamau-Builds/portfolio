@@ -1,0 +1,41 @@
+{
+  "name": "david-kamau-portfolio",
+  "version": "1.0.0",
+  "description": "Professional portfolio of David Washington Kamau",
+  "main": "index.html",
+  "scripts": {
+    "build": "eleventy",
+    "serve": "eleventy --serve",
+    "test": "npm run build && npm run test:html && npm run test:css && npm run test:js && npm run test:accessibility && npm run test:security && npm run test:images && npm run test:seo",
+    "test:html": "html-validate _site/index.html --config .htmlvalidate.json",
+    "test:css": "find css/ -name '*.css' -exec w3c-css-validator {} \\;",
+    "test:js": "eslint js/*.js --config .eslintrc.json",
+    "test:accessibility": "node scripts/accessibility-test.js",
+    "test:security": "node scripts/security-scan.js",
+    "test:images": "node scripts/image-check.js",
+    "test:seo": "node scripts/seo-check.js",
+    "lighthouse": "lhci autorun --config .lighthouserc.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/David-Kamau-Builds/portfolio.git"
+  },
+  "keywords": [
+    "portfolio",
+    "developer",
+    "aws",
+    "fullstack"
+  ],
+  "author": "David Washington Kamau",
+  "license": "MIT",
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1",
+    "@axe-core/puppeteer": "^4.8.2",
+    "@lhci/cli": "^0.15.1",
+    "broken-link-checker": "^0.7.8",
+    "eslint": "^8.57.0",
+    "html-validate": "^8.7.4",
+    "puppeteer": "^24.19.0",
+    "w3c-css-validator": "^1.0.0"
+  }
+}

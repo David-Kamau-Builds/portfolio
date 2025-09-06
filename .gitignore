@@ -1,0 +1,98 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+yarn.lock
+pnpm-lock.yaml
+
+# Build outputs
+dist/
+build/
+_site/
+out/
+.next/
+.nuxt/
+.cache/
+.parcel-cache/
+
+# Eleventy specific
+.eleventy.js.cache
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+.atom/
+.brackets.json
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+logs/
+.npm/
+.npm-cache/
+.eslintcache
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+
+# Testing & CI
+.lighthouseci/
+lhci-reports/
+.nyc_output/
+jest/
+.jest/
+test-results/
+.axe-reports/
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# Security & Secrets
+.secrets/
+*.pem
+*.key
+*.crt
+*.p12
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Archives
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Development documentation (comprehensive)
+DEVELOPMENT.md

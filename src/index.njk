@@ -1,0 +1,39 @@
+---
+layout: base.njk
+---
+
+{% include "hero.njk" %}
+
+<section id="about" class="about-section section-padding">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title">About Me</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="row align-items-center">
+            <div class="col-lg-5" data-aos="fade-right">
+                <div class="about-image">
+                    <img src="images/logo.svg" alt="David Washington Kamau" class="img-fluid rounded" loading="lazy">
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+                <div class="about-content">
+                    <p class="lead"><strong>Software Developer</strong> building solutions that convert clicks into value. Proficient in <strong>Reactive Java, HTML/CSS, JavaScript, PHP(Laravel), MySQL, Node.js, Express.Js, Postman, Python, React</strong> and <strong>AWS Cloud</strong> architecture.</p>
+                    <p>I craft <strong>user-first experiences</strong> with clean code and scalable backends. Currently exploring <strong>blockchain for public services</strong>.</p>
+                    <p><strong>Open to new opportunities</strong> where I can solve problems with technology. Let's build something impactful.</p>
+                    <div class="about-cta mt-4">
+                        <a href="#contact" class="btn btn-primary me-3">Let's Connect</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include "projects.njk" %}
+{% include "experience.njk" %}
+{% include "education.njk" %}
+{% include "certifications.njk" %}
+{% include "blog.njk" %}
+{% include "skills.njk" %}
+{% include "contact.njk" %}

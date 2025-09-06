@@ -1,0 +1,26 @@
+{
+    "name": "David Washington Kamau - Portfolio",
+    "short_name": "DWK Portfolio",
+    "description": "Professional portfolio of David Washington Kamau, Full Stack Developer and Cloud Practitioner",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#3498db",
+    "icons": [
+        {
+            "src": "favicon-16x16.png",
+            "sizes": "16x16",
+            "type": "image/png"
+        },
+        {
+            "src": "favicon-32x32.png",
+            "sizes": "32x32",
+            "type": "image/png"
+        },
+        {
+            "src": "apple-touch-icon.png",
+            "sizes": "180x180",
+            "type": "image/png"
+        }
+    ]
+}
