@@ -181,6 +181,26 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // Mobile menu click outside to close
+  document.addEventListener('click', function(e) {
+    try {
+      const navbarCollapse = document.querySelector('.navbar-collapse');
+      const navbarToggler = document.querySelector('.navbar-toggler');
+      
+      if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+        // Check if click is outside the menu and not on the toggler
+        if (!navbarCollapse.contains(e.target) && !navbarToggler.contains(e.target)) {
+          const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+            toggle: false
+          });
+          bsCollapse.hide();
+        }
+      }
+    } catch (error) {
+      console.error('Error in mobile menu click handler:', error);
+    }
+  });
+
   // Set current year in footer with error handling
   try {
     const yearElement = document.getElementById("year");

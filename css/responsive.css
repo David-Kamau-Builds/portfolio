@@ -1,5 +1,16 @@
 /* Responsive Design */
 
+/* Prevent horizontal scrolling */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+.container, .container-fluid {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
 /* Enhanced Touch Targets */
 @media (max-width: 768px) {
     .btn, .nav-link, .social-link {
@@ -158,5 +169,13 @@
     .project-links a {
         width: 100%;
         text-align: center;
+    }
+    
+    .navbar-brand {
+        max-width: calc(100% - 45px);
+    }
+    
+    .logo-text {
+        font-size: 0.75rem;
     }
 }

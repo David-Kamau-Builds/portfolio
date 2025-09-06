@@ -110,6 +110,12 @@
 
 /* Mobile Navigation */
 @media (max-width: 991px) {
+    .navbar-toggler {
+        position: relative;
+        z-index: 1051;
+        margin-right: 0;
+    }
+    
     .navbar-collapse {
         position: fixed;
         top: 0;
@@ -130,12 +136,35 @@
     .navbar-nav {
         flex-direction: column;
         gap: 1rem;
+        margin-top: 2rem;
     }
     
     .nav-link {
         padding: 1rem;
         border-bottom: 1px solid rgba(0,0,0,0.1);
         font-size: 1.1rem;
+        width: 100%;
+        text-align: left;
+    }
+    
+    /* Mobile menu overlay */
+    .navbar-collapse::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0,0,0,0.5);
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+    }
+    
+    .navbar-collapse.show::before {
+        opacity: 1;
+        pointer-events: all;
     }
 }
 
@@ -171,6 +200,7 @@
 @media (max-width: 576px) {
     .navbar-brand {
         gap: 0.5rem;
+        max-width: calc(100% - 60px);
     }
 
     .logo-img {
@@ -180,14 +210,24 @@
     .logo-text {
         font-size: 0.85rem;
     }
+    
+    .navbar-toggler {
+        padding: 0.25rem 0.5rem;
+        font-size: 1.1rem;
+    }
 }
 
 @media (max-width: 360px) {
     .navbar-brand {
-        max-width: 70%;
+        max-width: calc(100% - 50px);
     }
 
     .logo-text {
         font-size: 0.8rem;
+    }
+    
+    .navbar-toggler {
+        padding: 0.2rem 0.4rem;
+        font-size: 1rem;
     }
 }
