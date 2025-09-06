@@ -1,5 +1,25 @@
 // Certificate Enhancement JavaScript
 document.addEventListener('DOMContentLoaded', function() {
+    // Custom Carousel Indicators Sync
+    const carousel = document.getElementById('certCarousel');
+    if (carousel) {
+        const indicators = carousel.querySelectorAll('.cert-indicators button');
+        
+        // Sync indicators with carousel slide events
+        carousel.addEventListener('slide.bs.carousel', function(e) {
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === e.to);
+            });
+        });
+        
+        // Handle indicator clicks
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', function() {
+                const bsCarousel = new bootstrap.Carousel(carousel);
+                bsCarousel.to(index);
+            });
+        });
+    }
     // Certificate Card Hover Effects
     const certCards = document.querySelectorAll('.enhanced-cert');
     

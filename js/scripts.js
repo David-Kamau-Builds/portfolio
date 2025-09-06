@@ -156,50 +156,136 @@ document.addEventListener("DOMContentLoaded", function () {
     activateNavLink(); // Run once on page load
   }
 
-  // ===== BACK-TO-TOP BUTTON with error handling =====
-  const backToTopButton = document.getElementById("backToTop");
-  if (backToTopButton) {
-    window.addEventListener("scroll", () => {
-      try {
-        backToTopButton.classList.toggle("show", window.scrollY > 300);
-      } catch (error) {
-        console.error('Error in back-to-top scroll handler:', error);
-      }
-    });
 
-    backToTopButton.addEventListener("click", () => {
-      try {
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth",
-        });
-      } catch (error) {
-        console.error('Error in back-to-top click handler:', error);
-        // Fallback for older browsers
-        window.scrollTo(0, 0);
+
+  // Modern Back to Top Button
+  const backToTopButton = document.getElementById('backToTop');
+  if (backToTopButton) {
+    const progressCircle = backToTopButton.querySelector('.progress-circle');
+    const circumference = 2 * Math.PI * 26; // radius = 26
+    
+    function updateScrollProgress() {
+      const scrollTop = window.pageYOffset;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = scrollTop / docHeight;
+      const offset = circumference - (scrollPercent * circumference);
+      
+      if (progressCircle) {
+        progressCircle.style.strokeDashoffset = offset;
       }
+      
+      // Show/hide button
+      if (scrollTop > 300) {
+        backToTopButton.classList.add('show');
+      } else {
+        backToTopButton.classList.remove('show');
+      }
+    }
+    
+    window.addEventListener('scroll', updateScrollProgress);
+    
+    backToTopButton.addEventListener('click', () => {
+      // Add click animation
+      backToTopButton.classList.add('clicked');
+      
+      // Remove animation class after animation completes
+      setTimeout(() => {
+        backToTopButton.classList.remove('clicked');
+      }, 600);
+      
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
     });
   }
 
-  // Mobile menu click outside to close
-  document.addEventListener('click', function(e) {
-    try {
-      const navbarCollapse = document.querySelector('.navbar-collapse');
-      const navbarToggler = document.querySelector('.navbar-toggler');
-      
-      if (navbarCollapse && navbarCollapse.classList.contains('show')) {
-        // Check if click is outside the menu and not on the toggler
-        if (!navbarCollapse.contains(e.target) && !navbarToggler.contains(e.target)) {
+  // Mobile menu management
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+  const navbarToggler = document.querySelector('.navbar-toggler');
+  const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+  
+  if (navbarCollapse && navbarToggler && mobileMenuOverlay) {
+    // Handle menu toggle
+    navbarToggler.addEventListener('click', function() {
+      try {
+        const isMenuOpen = navbarCollapse.classList.contains('show');
+        if (!isMenuOpen) {
+          // Menu is about to open
+          setTimeout(() => {
+            mobileMenuOverlay.classList.add('show');
+            document.body.classList.add('menu-open');
+          }, 50);
+        }
+      } catch (error) {
+        console.error('Error in menu toggle handler:', error);
+      }
+    });
+    
+    // Handle Bootstrap collapse events
+    navbarCollapse.addEventListener('hidden.bs.collapse', function() {
+      try {
+        mobileMenuOverlay.classList.remove('show');
+        document.body.classList.remove('menu-open');
+      } catch (error) {
+        console.error('Error in collapse hidden handler:', error);
+      }
+    });
+    
+    navbarCollapse.addEventListener('shown.bs.collapse', function() {
+      try {
+        mobileMenuOverlay.classList.add('show');
+        document.body.classList.add('menu-open');
+      } catch (error) {
+        console.error('Error in collapse shown handler:', error);
+      }
+    });
+    
+    // Click outside to close - overlay click
+    mobileMenuOverlay.addEventListener('click', function() {
+      try {
+        const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+          toggle: false
+        });
+        bsCollapse.hide();
+      } catch (error) {
+        console.error('Error in overlay click handler:', error);
+      }
+    });
+    
+    // Additional click outside handler for any missed clicks
+    document.addEventListener('click', function(e) {
+      try {
+        if (navbarCollapse.classList.contains('show')) {
+          // Check if click is outside the menu and not on the toggler
+          if (!navbarCollapse.contains(e.target) && 
+              !navbarToggler.contains(e.target) &&
+              !e.target.closest('.navbar')) {
+            const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+              toggle: false
+            });
+            bsCollapse.hide();
+          }
+        }
+      } catch (error) {
+        console.error('Error in document click handler:', error);
+      }
+    });
+    
+    // Close menu on escape key
+    document.addEventListener('keydown', function(e) {
+      try {
+        if (e.key === 'Escape' && navbarCollapse.classList.contains('show')) {
           const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
             toggle: false
           });
           bsCollapse.hide();
         }
+      } catch (error) {
+        console.error('Error in escape key handler:', error);
       }
-    } catch (error) {
-      console.error('Error in mobile menu click handler:', error);
-    }
-  });
+    });
+  }
 
   // Set current year in footer with error handling
   try {

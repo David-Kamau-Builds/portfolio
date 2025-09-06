@@ -111,26 +111,27 @@
     background-color: rgba(0, 0, 0, 0.1);
 }
 
-/* Back to Top Button */
+
+
+/* Modern Back to Top Button */
 .back-to-top {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
-    height: 50px;
-    width: 50px;
-    background: var(--primary-color);
-    color: white;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.95);
     border: none;
-    font-size: 20px;
-    font-weight: bold;
     border-radius: 50%;
     cursor: pointer;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(30px) rotate(360deg);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.3);
-    z-index: 9999;
+    transform: translateY(20px) scale(0.8);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    z-index: 1001;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -138,83 +139,151 @@
 }
 
 .back-to-top::before {
-    display: block;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color), #4a90e2);
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(0);
     transition: all 0.3s ease;
 }
 
-.back-to-top:hover {
-    background: var(--primary-dark);
-    box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
-    transform: translateY(-5px) scale(1.05);
-}
-
 .back-to-top:hover::before {
-    transform: translateY(-3px);
+    opacity: 1;
+    transform: scale(1);
 }
 
-.back-to-top:active::before {
-    animation: arrowLaunch 0.6s ease-out;
+.arrow-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
 }
 
-@keyframes arrowLaunch {
-    0% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    50% {
-        transform: translateY(-100%);
-        opacity: 0.5;
-    }
-    51% {
-        transform: translateY(100%);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
+.back-to-top:hover .arrow-icon {
+    color: white;
+    transform: translateY(-2px);
+}
+
+.progress-ring {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.progress-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.progress-circle {
+    fill: none;
+    stroke: var(--primary-color);
+    stroke-linecap: round;
+    stroke-dasharray: 163.36;
+    stroke-dashoffset: 163.36;
+    opacity: 0.3;
+    transition: stroke-dashoffset 0.1s ease;
 }
 
 .back-to-top.show {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0) rotate(0);
+    transform: translateY(0) scale(1);
 }
 
-@keyframes pulse {
-    0% {
-        box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.7);
+.back-to-top:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.back-to-top:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.8);
     }
-    70% {
-        box-shadow: 0 0 0 10px rgba(52, 152, 219, 0);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
     }
 }
 
-.back-to-top.show:hover {
-    animation: pulse 1.5s infinite;
+@keyframes arrowBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    25% {
+        transform: translateY(-8px);
+    }
+    50% {
+        transform: translateY(-4px);
+    }
+    75% {
+        transform: translateY(-6px);
+    }
 }
 
-/* Mobile adjustments for back-to-top */
+.back-to-top.show {
+    animation: fadeInUp 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.back-to-top.clicked .arrow-icon {
+    animation: arrowBounce 0.6s ease-out;
+}
+
+/* Dark mode support */
+.dark-mode .back-to-top {
+    background: rgba(44, 62, 80, 0.95);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .arrow-icon {
+    color: #64b5f6;
+}
+
+.dark-mode .progress-circle {
+    stroke: #64b5f6;
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
     .back-to-top {
-        bottom: 15px;
-        right: 15px;
-        height: 45px;
-        width: 45px;
-        font-size: 18px;
+        bottom: 25px;
+        right: 25px;
+        width: 55px;
+        height: 55px;
+    }
+    
+    .arrow-icon {
+        width: 22px;
+        height: 22px;
     }
 }
 
 @media (max-width: 480px) {
     .back-to-top {
-        bottom: 10px;
-        right: 10px;
-        height: 40px;
-        width: 40px;
-        font-size: 16px;
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+    }
+    
+    .arrow-icon {
+        width: 20px;
+        height: 20px;
     }
 }
 
