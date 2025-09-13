@@ -116,6 +116,10 @@ jobs:
       with:
         name: cached-build
         path: .
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+    - run: npm ci
     - run: npx html-validate _site/index.html || exit 1
 
   validate-js:
@@ -165,6 +169,11 @@ jobs:
       with:
         name: cached-build
         path: .
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+    - run: npm ci
+    - run: npx puppeteer browsers install chrome
     - run: node scripts/accessibility-test.js || exit 1
 
   validate-performance:
@@ -176,6 +185,11 @@ jobs:
       with:
         name: cached-build
         path: .
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+    - run: npm ci
+    - run: npx puppeteer browsers install chrome
     - run: npx lhci autorun --config .lighthouserc.json || exit 1
 
   validate-security:
@@ -187,7 +201,7 @@ jobs:
       with:
         name: cached-build
         path: .
-    - run: node scripts/security-scan.js || exit 1
+    - run: cd _site && node ../scripts/security-scan.js || exit 1
 
   validate-images:
     name: ✅ Validate - Image Optimization
@@ -198,7 +212,7 @@ jobs:
       with:
         name: cached-build
         path: .
-    - run: node scripts/image-check.js || exit 1
+    - run: cd _site && node ../scripts/image-check.js || exit 1
 
   validate-seo:
     name: ✅ Validate - SEO Requirements
@@ -209,7 +223,7 @@ jobs:
       with:
         name: cached-build
         path: .
-    - run: node scripts/seo-check.js || exit 1
+    - run: cd _site && node ../scripts/seo-check.js || exit 1
 
   validate-deps-security:
     name: ✅ Validate - Dependencies Security
