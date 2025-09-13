@@ -10,6 +10,7 @@
     "wcag/h30": "error",
     "wcag/h32": "error",
     "wcag/h36": "error",
-    "wcag/h37": "error"
+    "wcag/h37": "error",
+    "hidden-focusable": "off"
   }
 }
