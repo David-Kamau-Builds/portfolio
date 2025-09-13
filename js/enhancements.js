@@ -109,6 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
         canvas.style.pointerEvents = 'none';
         canvas.style.zIndex = '-1';
         canvas.style.opacity = '0.1';
+        canvas.setAttribute('aria-hidden', 'true');
         
         document.body.appendChild(canvas);
         
