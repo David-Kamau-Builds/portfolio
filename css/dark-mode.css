@@ -168,10 +168,20 @@ body.dark-mode .footer-copy {
 /* Back to Top Button */
 body.dark-mode .back-to-top {
     background-color: var(--dark-primary);
+    color: #ffffff;
 }
 
 body.dark-mode .back-to-top:hover {
     background-color: var(--dark-primary-dark);
+    color: #ffffff;
+}
+
+body.dark-mode .back-to-top .arrow-icon {
+    stroke: #ffffff;
+}
+
+body.dark-mode .progress-circle {
+    stroke: #ffffff;
 }
 
 /* Buttons */
