@@ -193,7 +193,7 @@ class ErrorBoundary {
           fatal: false
         });
       }
-    } catch (e) {
+    } catch {
       // Ignore reporting errors
     }
   }

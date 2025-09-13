@@ -54,7 +54,7 @@ const SecurityUtils = {
         return urlObj.toString();
       }
       return '';
-    } catch (error) {
+    } catch {
       return '';
     }
   }

@@ -254,8 +254,7 @@ document.addEventListener('DOMContentLoaded', function() {
         throw new Error(errorData.error || 'Failed to send message');
       }
 
-    } catch (error) {
-      ErrorHandler.logError('Form submission', error);
+    } catch {
       showStatus('Sorry, there was an error sending your message. Please try again later.', 'danger');
     } finally {
       toggleLoading(false);
@@ -303,7 +302,7 @@ document.addEventListener('DOMContentLoaded', function() {
         message: form.querySelector('textarea[name="message"]')?.value || ''
       };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-    } catch (error) {
+    } catch {
       // Ignore localStorage errors
     }
   }
@@ -321,7 +320,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (emailField && data.email) emailField.value = data.email;
         if (messageField && data.message) messageField.value = data.message;
       }
-    } catch (error) {
+    } catch {
       // Ignore localStorage errors
     }
   }
@@ -339,7 +338,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
       try {
         localStorage.removeItem(STORAGE_KEY);
-      } catch (error) {
+      } catch {
         // Ignore localStorage errors
       }
     }, 1000);
