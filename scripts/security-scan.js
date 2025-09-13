@@ -44,17 +44,39 @@ function scanForSecurityIssues() {
   ];
   
   function checkFile(filePath) {
-    const content = fs.readFileSync(filePath, 'utf8');
-    sensitivePatterns.forEach(pattern => {
-      if (pattern.test(content)) {
-        issues.push(`Potential sensitive data in ${filePath}`);
-      }
-    });
+    // Validate and sanitize file path to prevent traversal attacks
+    const normalizedPath = path.normalize(filePath);
+    const resolvedPath = path.resolve(normalizedPath);
+    const basePath = path.resolve('.');
+    
+    // Ensure the file is within the project directory
+    if (!resolvedPath.startsWith(basePath)) {
+      console.error(`Security: Path traversal attempt blocked: ${filePath}`);
+      return;
+    }
+    
+    // Check if file exists and is readable
+    if (!fs.existsSync(resolvedPath)) {
+      console.warn(`File not found: ${resolvedPath}`);
+      return;
+    }
+    
+    try {
+      const content = fs.readFileSync(resolvedPath, 'utf8');
+      sensitivePatterns.forEach(pattern => {
+        if (pattern.test(content)) {
+          issues.push(`Potential sensitive data in ${path.relative(basePath, resolvedPath)}`);
+        }
+      });
+    } catch (error) {
+      console.error(`Error reading file ${resolvedPath}:`, error.message);
+    }
   }
   
-  // Scan all files
-  ['index.html', ...jsFiles].forEach(file => {
-    if (fs.existsSync(file)) checkFile(file);
+  // Scan all files with path validation
+  const filesToScan = ['index.html', ...jsFiles];
+  filesToScan.forEach(file => {
+    checkFile(file);
   });
   
   if (issues.length > 0) {

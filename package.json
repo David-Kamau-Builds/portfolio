@@ -30,11 +30,11 @@
   "license": "MIT",
   "devDependencies": {
     "@11ty/eleventy": "^2.0.1",
-    "@axe-core/puppeteer": "^4.8.2",
+    "@axe-core/puppeteer": "^4.10.2",
     "@lhci/cli": "^0.15.1",
     "broken-link-checker": "^0.7.8",
-    "eslint": "^8.57.0",
-    "html-validate": "^8.7.4",
+    "eslint": "^9.0.0",
+    "html-validate": "^8.29.0",
     "puppeteer": "^24.19.0",
     "w3c-css-validator": "^1.0.0"
   }

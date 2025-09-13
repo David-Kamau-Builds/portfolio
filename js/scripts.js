@@ -1,4 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // Load security utilities
+  const securityScript = document.createElement('script');
+  securityScript.src = 'js/security-utils.js';
+  document.head.appendChild(securityScript);
+  
+  const contentSecurityScript = document.createElement('script');
+  contentSecurityScript.src = 'js/content-security.js';
+  document.head.appendChild(contentSecurityScript);
+
   // Initialize Bootstrap components with error handling
   try {
     const tooltipTriggerList = [].slice.call(

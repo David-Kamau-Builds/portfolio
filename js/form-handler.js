@@ -11,9 +11,17 @@ document.addEventListener('DOMContentLoaded', function() {
   const btnSpinner = submitBtn?.querySelector('.btn-spinner');
   const formStatus = document.querySelector('.form-status');
 
-  // Rate limiting
+  // Rate limiting and CSRF protection
   let lastSubmission = 0;
   const RATE_LIMIT_MS = 30000; // 30 seconds between submissions
+  let csrfToken = SecurityUtils.generateCSRFToken();
+  
+  // Add CSRF token to form
+  const csrfInput = document.createElement('input');
+  csrfInput.type = 'hidden';
+  csrfInput.name = '_csrf';
+  csrfInput.value = csrfToken;
+  form.appendChild(csrfInput);
 
   /**
    * Show form status message
@@ -213,12 +221,16 @@ document.addEventListener('DOMContentLoaded', function() {
         formData.append('message', SecurityUtils.sanitizeInput(messageField.value.trim()));
       }
 
-      // Add timestamp and basic bot protection
+      // Add timestamp, CSRF token, and basic bot protection
       formData.append('_timestamp', new Date().toISOString());
       formData.append('_subject', 'Portfolio Contact Form Submission');
+      formData.append('_csrf', csrfToken);
 
+      // Get form endpoint from environment or form action
+      const formEndpoint = process.env.FORM_ENDPOINT || form.action;
+      
       // Submit form
-      const response = await fetch(form.action, {
+      const response = await fetch(formEndpoint, {
         method: 'POST',
         body: formData,
         headers: {

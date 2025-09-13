@@ -97,7 +97,10 @@ class ErrorBoundary {
       // Add error indicator
       const errorDiv = document.createElement('div');
       errorDiv.className = 'image-error';
-      errorDiv.innerHTML = '<i class="fas fa-image"></i> Image not available';
+      errorDiv.textContent = 'Image not available';
+      const icon = document.createElement('i');
+      icon.className = 'fas fa-image';
+      errorDiv.insertBefore(icon, errorDiv.firstChild);
       errorDiv.style.cssText = `
         display: flex;
         align-items: center;
@@ -154,19 +157,26 @@ class ErrorBoundary {
   createErrorMessage() {
     const messageDiv = document.createElement('div');
     messageDiv.className = 'error-boundary-message';
-    messageDiv.innerHTML = `
-      <div class="alert alert-warning alert-dismissible fade show" role="alert" style="
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        z-index: 9999;
-        max-width: 400px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      ">
-        <strong>Notice:</strong> Some features may not work as expected. Please refresh the page if you encounter issues.
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    `;
+    const alertDiv = document.createElement('div');
+    alertDiv.className = 'alert alert-warning alert-dismissible fade show';
+    alertDiv.setAttribute('role', 'alert');
+    alertDiv.style.cssText = 'position: fixed; top: 20px; right: 20px; z-index: 9999; max-width: 400px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);';
+    
+    const strong = document.createElement('strong');
+    strong.textContent = 'Notice:';
+    alertDiv.appendChild(strong);
+    
+    const text = document.createTextNode(' Some features may not work as expected. Please refresh the page if you encounter issues.');
+    alertDiv.appendChild(text);
+    
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'btn-close';
+    button.setAttribute('data-bs-dismiss', 'alert');
+    button.setAttribute('aria-label', 'Close');
+    alertDiv.appendChild(button);
+    
+    messageDiv.appendChild(alertDiv);
     
     return messageDiv;
   }
