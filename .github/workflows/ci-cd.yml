@@ -7,90 +7,253 @@ on:
     branches: [ main ]
 
 jobs:
-  setup:
-    name: 🚀 Setup & Build
+  checkout:
+    name: 🚀 Setup - Checkout code
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    - uses: actions/upload-artifact@v4
+      with:
+        name: source-code
+        path: .
+
+  setup-node:
+    name: 🚀 Setup - Node.js Environment
+    runs-on: ubuntu-latest
+    needs: checkout
+    steps:
+    - uses: actions/download-artifact@v4
+      with:
+        name: source-code
+        path: .
     - uses: actions/setup-node@v4
       with:
         node-version: '18'
         cache: 'npm'
+    - uses: actions/upload-artifact@v4
+      with:
+        name: node-setup
+        path: .
+
+  install-deps:
+    name: 🚀 Setup - Install Dependencies
+    runs-on: ubuntu-latest
+    needs: setup-node
+    steps:
+    - uses: actions/download-artifact@v4
+      with:
+        name: node-setup
+        path: .
     - run: npm install
+    - uses: actions/upload-artifact@v4
+      with:
+        name: with-deps
+        path: .
+
+  build-site:
+    name: 🚀 Setup - Build Site
+    runs-on: ubuntu-latest
+    needs: install-deps
+    steps:
+    - uses: actions/download-artifact@v4
+      with:
+        name: with-deps
+        path: .
     - run: npm run build
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
-        name: build-files
-        path: _site
+        name: built-site
+        path: .
 
-  validate:
-    name: ✅ Validate Code
+  cache-deps:
+    name: 🚀 Setup - Cache Dependencies
     runs-on: ubuntu-latest
-    needs: setup
+    needs: build-site
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
+    - uses: actions/download-artifact@v4
       with:
-        node-version: '18'
-        cache: 'npm'
-    - run: npm install
-    - uses: actions/download-artifact@v3
+        name: built-site
+        path: .
+    - uses: actions/cache@v3
       with:
-        name: build-files
-        path: _site
-    - run: npx html-validate _site/index.html
-    - run: npx eslint js/*.js
-    - run: npm audit --audit-level=high
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+    - uses: actions/upload-artifact@v4
+      with:
+        name: cached-build
+        path: .
 
-  performance:
-    name: 📊 Performance & SEO
+  validate-html:
+    name: ✅ Validate - HTML Structure
     runs-on: ubuntu-latest
-    needs: setup
+    needs: cache-deps
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
+    - uses: actions/download-artifact@v4
       with:
-        node-version: '18'
-        cache: 'npm'
-    - run: npm install
-    - uses: actions/download-artifact@v3
-      with:
-        name: build-files
-        path: _site
-    - run: node scripts/accessibility-test.js
-    - run: npx lhci autorun --config .lighthouserc.json
-    - run: node scripts/seo-check.js
+        name: cached-build
+        path: .
+    - run: npx html-validate _site/index.html || exit 1
 
-  security:
-    name: 🔒 Security Scan
+  validate-js:
+    name: ✅ Validate - JavaScript Code
     runs-on: ubuntu-latest
-    needs: setup
+    needs: cache-deps
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
+    - uses: actions/download-artifact@v4
       with:
-        node-version: '18'
-        cache: 'npm'
-    - run: npm install
-    - uses: actions/download-artifact@v3
-      with:
-        name: build-files
-        path: _site
-    - run: node scripts/security-scan.js
-    - run: node scripts/image-check.js
+        name: cached-build
+        path: .
+    - run: npx eslint js/*.js || exit 1
 
-  deploy:
-    name: 🚢 Deploy
+  validate-css:
+    name: ✅ Validate - CSS Styles
     runs-on: ubuntu-latest
-    needs: [validate, performance, security]
-    if: github.ref == 'refs/heads/main'
+    needs: cache-deps
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
-        name: build-files
-        path: _site
+        name: cached-build
+        path: .
+    - run: find css/ -name "*.css" -exec npx w3c-css-validator {} \; || exit 1
+
+  validate-links:
+    name: ✅ Validate - Link Integrity
+    runs-on: ubuntu-latest
+    needs: cache-deps
+    steps:
+    - uses: actions/download-artifact@v4
+      with:
+        name: cached-build
+        path: .
+    - run: npx blc http://localhost:3000 --recursive --exclude-external || exit 1
+
+  validate-accessibility:
+    name: ✅ Validate - Accessibility Standards
+    runs-on: ubuntu-latest
+    needs: cache-deps
+    steps:
+    - uses: actions/download-artifact@v4
+      with:
+        name: cached-build
+        path: .
+    - run: node scripts/accessibility-test.js || exit 1
+
+  validate-performance:
+    name: ✅ Validate - Performance Metrics
+    runs-on: ubuntu-latest
+    needs: cache-deps
+    steps:
+    - uses: actions/download-artifact@v4
+      with:
+        name: cached-build
+        path: .
+    - run: npx lhci autorun --config .lighthouserc.json || exit 1
+
+  validate-security:
+    name: ✅ Validate - Security Scan
+    runs-on: ubuntu-latest
+    needs: cache-deps
+    steps:
+    - uses: actions/download-artifact@v4
+      with:
+        name: cached-build
+        path: .
+    - run: node scripts/security-scan.js || exit 1
+
+  validate-images:
+    name: ✅ Validate - Image Optimization
+    runs-on: ubuntu-latest
+    needs: cache-deps
+    steps:
+    - uses: actions/download-artifact@v4
+      with:
+        name: cached-build
+        path: .
+    - run: node scripts/image-check.js || exit 1
+
+  validate-seo:
+    name: ✅ Validate - SEO Requirements
+    runs-on: ubuntu-latest
+    needs: cache-deps
+    steps:
+    - uses: actions/download-artifact@v4
+      with:
+        name: cached-build
+        path: .
+    - run: node scripts/seo-check.js || exit 1
+
+  validate-deps-security:
+    name: ✅ Validate - Dependencies Security
+    runs-on: ubuntu-latest
+    needs: cache-deps
+    steps:
+    - uses: actions/download-artifact@v4
+      with:
+        name: cached-build
+        path: .
+    - run: npm audit --audit-level=high || exit 1
+
+  validate-bundle-size:
+    name: ✅ Validate - Bundle Size
+    runs-on: ubuntu-latest
+    needs: cache-deps
+    steps:
+    - uses: actions/download-artifact@v4
+      with:
+        name: cached-build
+        path: .
+    - run: |
+        BUNDLE_SIZE=$(du -sb _site | cut -f1)
+        if [ $BUNDLE_SIZE -gt 10485760 ]; then echo "Bundle too large: $BUNDLE_SIZE bytes" && exit 1; fi
+
+  deploy-pages:
+    name: 🚢 Deploy - GitHub Pages
+    runs-on: ubuntu-latest
+    needs: [validate-html, validate-js, validate-css, validate-links, validate-accessibility, validate-performance, validate-security, validate-images, validate-seo, validate-deps-security, validate-bundle-size]
+    if: github.ref == 'refs/heads/main' && success()
+    steps:
+    - uses: actions/download-artifact@v4
+      with:
+        name: cached-build
+        path: .
     - uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./_site
+
+  deploy-notify:
+    name: 🚢 Deploy - Notify Success
+    runs-on: ubuntu-latest
+    needs: deploy-pages
+    if: github.ref == 'refs/heads/main' && success()
+    steps:
+    - run: echo "✅ Deployment successful to https://${{ github.repository_owner }}.github.io/portfolio/"
+
+  cleanup-artifacts:
+    name: 🧹 Cleanup - Remove Build Artifacts
+    runs-on: ubuntu-latest
+    needs: [deploy-notify]
+    if: always()
+    steps:
+    - uses: actions/download-artifact@v4
+      with:
+        name: cached-build
+        path: .
+    - run: |
+        rm -rf node_modules/.cache
+        rm -rf _site
+        npm cache clean --force
+
+  cleanup-temp:
+    name: 🧹 Cleanup - Clear Temporary Files
+    runs-on: ubuntu-latest
+    needs: cleanup-artifacts
+    if: always()
+    steps:
+    - uses: actions/download-artifact@v4
+      with:
+        name: cached-build
+        path: .
+    - run: |
+        find . -name "*.tmp" -delete
+        find . -name "*.log" -delete
