@@ -40,6 +40,7 @@ jobs:
       with:
         name: node-setup
         path: .
+        include-hidden-files: true
 
   install-deps:
     name: 🚀 Setup - Install Dependencies
@@ -59,6 +60,7 @@ jobs:
       with:
         name: with-deps
         path: .
+        include-hidden-files: true
 
   build-site:
     name: 🚀 Setup - Build Site
@@ -88,6 +90,7 @@ jobs:
       with:
         name: built-site
         path: .
+        include-hidden-files: true
 
   cache-deps:
     name: 🚀 Setup - Cache Dependencies
@@ -106,6 +109,7 @@ jobs:
       with:
         name: cached-build
         path: .
+        include-hidden-files: true
 
   validate-html:
     name: ✅ Validate - HTML Structure
