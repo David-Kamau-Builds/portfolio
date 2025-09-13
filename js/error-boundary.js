@@ -54,9 +54,10 @@ class ErrorBoundary {
     console.error('Error Boundary caught error:', errorInfo);
 
     // Show user-friendly message for critical errors
-    if (this.errorCount <= 3) {
-      this.showErrorMessage(errorInfo);
-    }
+    // Temporarily disabled for debugging
+    // if (this.errorCount <= 3) {
+    //   this.showErrorMessage(errorInfo);
+    // }
 
     // Prevent error spam
     if (this.errorCount >= this.maxErrors) {
