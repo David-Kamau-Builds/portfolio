@@ -108,7 +108,9 @@
 <body class="light-mode">
     {% include "navigation.njk" %}
 
+    <main>
 {{ content | safe }}
+    </main>
 
     {% include "footer.njk" %}
     {% include "theme-toggle.njk" %}
