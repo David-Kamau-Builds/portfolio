@@ -44,7 +44,11 @@ jobs:
       with:
         name: node-setup
         path: .
-    - run: npm install
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    - run: npm ci
     - uses: actions/upload-artifact@v4
       with:
         name: with-deps
@@ -59,7 +63,11 @@ jobs:
       with:
         name: with-deps
         path: .
-    - run: npx eleventy
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    - run: npm run build
     - uses: actions/upload-artifact@v4
       with:
         name: built-site
