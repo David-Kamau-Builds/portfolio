@@ -59,7 +59,7 @@ jobs:
       with:
         name: with-deps
         path: .
-    - run: npm run build
+    - run: npx eleventy
     - uses: actions/upload-artifact@v4
       with:
         name: built-site
