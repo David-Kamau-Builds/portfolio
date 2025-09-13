@@ -7,12 +7,6 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("*.json");
   eleventyConfig.addPassthroughCopy("*.js");
   
-  // Copy new utility files
-  eleventyConfig.addPassthroughCopy("js/utils.js");
-  eleventyConfig.addPassthroughCopy("js/form-handler.js");
-  eleventyConfig.addPassthroughCopy("css/form-enhancements.css");
-  eleventyConfig.addPassthroughCopy("css/modern-projects.css");
-  
   return {
     dir: {
       input: "src",
