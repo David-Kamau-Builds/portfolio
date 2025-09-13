@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const verifyButtons = document.querySelectorAll('.verify-btn:not(.disabled)');
     
     verifyButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
+        button.addEventListener('click', function() {
             // Add click animation
             this.style.transform = 'scale(0.95)';
             setTimeout(() => {

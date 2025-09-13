@@ -7,79 +7,90 @@ on:
     branches: [ main ]
 
 jobs:
-  validate:
+  pipeline:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Checkout code
+    # SETUP STAGE
+    - name: 🚀 Setup - Checkout code
       uses: actions/checkout@v4
 
-    - name: Setup Node.js
+    - name: 🚀 Setup - Node.js Environment
       uses: actions/setup-node@v4
       with:
         node-version: '18'
         cache: 'npm'
 
-    - name: Install dependencies
+    - name: 🚀 Setup - Install Dependencies
+      run: npm install
+
+    - name: 🚀 Setup - Build Site
+      run: npm run build
+
+    - name: 🚀 Setup - Cache Dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+
+    # VALIDATION STAGE
+    - name: ✅ Validate - HTML Structure
+      run: npx html-validate _site/index.html || exit 1
+
+    - name: ✅ Validate - JavaScript Code
+      run: npx eslint js/*.js || exit 1
+
+    - name: ✅ Validate - CSS Styles
+      run: find css/ -name "*.css" -exec npx w3c-css-validator {} \; || exit 1
+
+    - name: ✅ Validate - Link Integrity
+      run: npx blc http://localhost:3000 --recursive --exclude-external || exit 1
+
+    - name: ✅ Validate - Accessibility Standards
+      run: node scripts/accessibility-test.js || exit 1
+
+    - name: ✅ Validate - Performance Metrics
+      run: npx lhci autorun --config .lighthouserc.json || exit 1
+
+    - name: ✅ Validate - Security Scan
+      run: node scripts/security-scan.js || exit 1
+
+    - name: ✅ Validate - Image Optimization
+      run: node scripts/image-check.js || exit 1
+
+    - name: ✅ Validate - SEO Requirements
+      run: node scripts/seo-check.js || exit 1
+
+    - name: ✅ Validate - Dependencies Security
+      run: npm audit --audit-level=high || exit 1
+
+    - name: ✅ Validate - Bundle Size
       run: |
-        npm install
+        BUNDLE_SIZE=$(du -sb _site | cut -f1)
+        if [ $BUNDLE_SIZE -gt 10485760 ]; then echo "Bundle too large: $BUNDLE_SIZE bytes" && exit 1; fi
 
-    - name: Build site
-      run: |
-        npm run build
-
-    - name: HTML Validation
-      run: |
-        npx html-validate _site/index.html --config .htmlvalidate.json || exit 1
-
-    - name: CSS Validation
-      run: |
-        find css/ -name "*.css" -exec npx w3c-css-validator {} \; || exit 1
-
-    - name: JavaScript Linting
-      run: |
-        npx eslint js/*.js --config .eslintrc.json || exit 1
-
-    - name: Link Validation
-      run: |
-        npx blc http://localhost:3000 --recursive --exclude-external || exit 1
-
-    - name: Accessibility Testing
-      run: |
-        node scripts/accessibility-test.js || exit 1
-
-    - name: Performance Testing
-      run: |
-        npx lhci autorun --config .lighthouserc.json || exit 1
-
-    - name: Security Scan
-      run: |
-        node scripts/security-scan.js || exit 1
-
-    - name: Image Optimization Check
-      run: |
-        node scripts/image-check.js || exit 1
-
-    - name: SEO Validation
-      run: |
-        node scripts/seo-check.js || exit 1
-
-  deploy:
-    needs: validate
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: Build site
-      run: |
-        npm install
-        npm run build
-
-    - name: Deploy to GitHub Pages
+    # DEPLOYMENT STAGE (only on main branch)
+    - name: 🚢 Deploy - GitHub Pages
+      if: github.ref == 'refs/heads/main' && success()
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./_site
+
+    - name: 🚢 Deploy - Notify Success
+      if: github.ref == 'refs/heads/main' && success()
+      run: echo "✅ Deployment successful to https://${{ github.repository_owner }}.github.io/portfolio/"
+
+    # CLEANUP STAGE (always runs)
+    - name: 🧹 Cleanup - Remove Build Artifacts
+      if: always()
+      run: |
+        rm -rf node_modules/.cache
+        rm -rf _site
+        npm cache clean --force
+
+    - name: 🧹 Cleanup - Clear Temporary Files
+      if: always()
+      run: |
+        find . -name "*.tmp" -delete
+        find . -name "*.log" -delete

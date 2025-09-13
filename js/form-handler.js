@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Rate limiting and CSRF protection
   let lastSubmission = 0;
   const RATE_LIMIT_MS = 30000; // 30 seconds between submissions
-  let csrfToken = SecurityUtils.generateCSRFToken();
+  const csrfToken = SecurityUtils.generateCSRFToken();
   
   // Add CSRF token to form
   const csrfInput = document.createElement('input');

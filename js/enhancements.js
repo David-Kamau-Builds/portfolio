@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.appendChild(canvas);
         
         const ctx = canvas.getContext('2d');
-        let particles = [];
+        const particles = [];
         
         const resizeCanvas = () => {
             canvas.width = window.innerWidth;
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const animate = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
-            particles.forEach((particle, index) => {
+            particles.forEach((particle) => {
                 particle.x += particle.vx;
                 particle.y += particle.vy;
                 

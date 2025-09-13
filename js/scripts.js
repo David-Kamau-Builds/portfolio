@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const tooltipTriggerList = [].slice.call(
       document.querySelectorAll('[data-bs-toggle="tooltip"]')
     );
-    const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    tooltipTriggerList.map(function (tooltipTriggerEl) {
       try {
         return new bootstrap.Tooltip(tooltipTriggerEl);
       } catch (error) {
@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Use utility functions from utils.js
   const sanitizeInput = window.SecurityUtils?.sanitizeInput || ((input) => input);
-  const isValidSelector = window.SecurityUtils?.isValidSelector || ((selector) => true);
+  const isValidSelector = window.SecurityUtils?.isValidSelector || (() => true);
 
   // Smooth scrolling for all links
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       sections.forEach((section) => {
         const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
+        section.clientHeight;
 
         if (window.scrollY >= sectionTop - 200) {
           current = sanitizeInput(section.getAttribute("id") || '');
@@ -376,23 +376,26 @@ document.addEventListener("DOMContentLoaded", function () {
           // Add active class to clicked button
           this.classList.add("active");
 
-        const filterValue = sanitizeInput(this.getAttribute("data-filter") || '');
+          const filterValue = sanitizeInput(this.getAttribute("data-filter") || '');
 
-        portfolioItems.forEach((item) => {
-          try {
-            const category = sanitizeInput(item.getAttribute("data-category") || '');
-            if (
-              filterValue === "all" ||
-              category.includes(filterValue)
-            ) {
-              item.style.display = "block";
-            } else {
-              item.style.display = "none";
+          portfolioItems.forEach((item) => {
+            try {
+              const category = sanitizeInput(item.getAttribute("data-category") || '');
+              if (
+                filterValue === "all" ||
+                category.includes(filterValue)
+              ) {
+                item.style.display = "block";
+              } else {
+                item.style.display = "none";
+              }
+            } catch (error) {
+              console.error('Error filtering portfolio item:', error);
             }
-          } catch (error) {
-            console.error('Error filtering portfolio item:', error);
-          }
-        });
+          });
+        } catch (error) {
+          console.error('Error in button click handler:', error);
+        }
       });
     });
 
