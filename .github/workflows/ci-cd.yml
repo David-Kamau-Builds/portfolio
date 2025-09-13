@@ -68,6 +68,15 @@ jobs:
         node-version: '18'
         cache: 'npm'
     - run: npm ci
+    - run: |
+        echo "Current directory:"
+        pwd
+        echo "Directory contents:"
+        ls -la
+        echo "Source directory contents:"
+        ls -la src/ || echo "src directory not found"
+        echo "Eleventy config:"
+        cat .eleventy.js
     - run: npm run build
     - uses: actions/upload-artifact@v4
       with:
