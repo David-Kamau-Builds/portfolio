@@ -257,5 +257,13 @@
 .footer-copy {
     text-align: center;
     font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.7);
+    color: #e0e0e0;
+}
+
+.footer-copy p {
+    color: #e0e0e0;
+}
+
+#year {
+    color: #e0e0e0;
 }

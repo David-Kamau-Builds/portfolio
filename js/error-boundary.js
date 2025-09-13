@@ -164,6 +164,7 @@ class ErrorBoundary {
     
     const strong = document.createElement('strong');
     strong.textContent = 'Notice:';
+    strong.style.color = '#664d03';
     alertDiv.appendChild(strong);
     
     const text = document.createTextNode(' Some features may not work as expected. Please refresh the page if you encounter issues.');

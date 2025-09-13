@@ -33,9 +33,9 @@
 
 .logo-text {
     font-family: var(--font-primary);
-    font-weight: 500;
+    font-weight: 600;
     font-size: 0.9rem;
-    color: var(--dark-color);
+    color: #1a1a1a;
     line-height: 1;
     white-space: nowrap;
     transition: var(--transition);
