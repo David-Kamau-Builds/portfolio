@@ -4,8 +4,8 @@
   "description": "Professional portfolio of David Washington Kamau",
   "main": "index.html",
   "scripts": {
-    "build": "eleventy",
-    "serve": "eleventy --serve",
+    "build": "npx @11ty/eleventy",
+    "serve": "npx @11ty/eleventy --serve",
     "test": "npm run build && npm run test:html && npm run test:css && npm run test:js && npm run test:accessibility && npm run test:security && npm run test:images && npm run test:seo",
     "test:html": "html-validate _site/index.html --config .htmlvalidate.json",
     "test:css": "find css/ -name '*.css' -exec w3c-css-validator {} \\;",
