@@ -12,10 +12,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    - run: |
+        echo "Files being uploaded:"
+        ls -la
+        echo "Eleventy config exists:"
+        ls -la .eleventy.js || echo "Missing .eleventy.js"
     - uses: actions/upload-artifact@v4
       with:
         name: source-code
         path: .
+        include-hidden-files: true
 
   setup-node:
     name: 🚀 Setup - Node.js Environment
