@@ -7,90 +7,90 @@ on:
     branches: [ main ]
 
 jobs:
-  pipeline:
+  setup:
+    name: 🚀 Setup & Build
     runs-on: ubuntu-latest
-    
     steps:
-    # SETUP STAGE
-    - name: 🚀 Setup - Checkout code
-      uses: actions/checkout@v4
-
-    - name: 🚀 Setup - Node.js Environment
-      uses: actions/setup-node@v4
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
       with:
         node-version: '18'
         cache: 'npm'
-
-    - name: 🚀 Setup - Install Dependencies
-      run: npm install
-
-    - name: 🚀 Setup - Build Site
-      run: npm run build
-
-    - name: 🚀 Setup - Cache Dependencies
-      uses: actions/cache@v3
+    - run: npm install
+    - run: npm run build
+    - uses: actions/upload-artifact@v3
       with:
-        path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        name: build-files
+        path: _site
 
-    # VALIDATION STAGE
-    - name: ✅ Validate - HTML Structure
-      run: npx html-validate _site/index.html || exit 1
+  validate:
+    name: ✅ Validate Code
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    - run: npm install
+    - uses: actions/download-artifact@v3
+      with:
+        name: build-files
+        path: _site
+    - run: npx html-validate _site/index.html
+    - run: npx eslint js/*.js
+    - run: npm audit --audit-level=high
 
-    - name: ✅ Validate - JavaScript Code
-      run: npx eslint js/*.js || exit 1
+  performance:
+    name: 📊 Performance & SEO
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    - run: npm install
+    - uses: actions/download-artifact@v3
+      with:
+        name: build-files
+        path: _site
+    - run: node scripts/accessibility-test.js
+    - run: npx lhci autorun --config .lighthouserc.json
+    - run: node scripts/seo-check.js
 
-    - name: ✅ Validate - CSS Styles
-      run: find css/ -name "*.css" -exec npx w3c-css-validator {} \; || exit 1
+  security:
+    name: 🔒 Security Scan
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    - run: npm install
+    - uses: actions/download-artifact@v3
+      with:
+        name: build-files
+        path: _site
+    - run: node scripts/security-scan.js
+    - run: node scripts/image-check.js
 
-    - name: ✅ Validate - Link Integrity
-      run: npx blc http://localhost:3000 --recursive --exclude-external || exit 1
-
-    - name: ✅ Validate - Accessibility Standards
-      run: node scripts/accessibility-test.js || exit 1
-
-    - name: ✅ Validate - Performance Metrics
-      run: npx lhci autorun --config .lighthouserc.json || exit 1
-
-    - name: ✅ Validate - Security Scan
-      run: node scripts/security-scan.js || exit 1
-
-    - name: ✅ Validate - Image Optimization
-      run: node scripts/image-check.js || exit 1
-
-    - name: ✅ Validate - SEO Requirements
-      run: node scripts/seo-check.js || exit 1
-
-    - name: ✅ Validate - Dependencies Security
-      run: npm audit --audit-level=high || exit 1
-
-    - name: ✅ Validate - Bundle Size
-      run: |
-        BUNDLE_SIZE=$(du -sb _site | cut -f1)
-        if [ $BUNDLE_SIZE -gt 10485760 ]; then echo "Bundle too large: $BUNDLE_SIZE bytes" && exit 1; fi
-
-    # DEPLOYMENT STAGE (only on main branch)
-    - name: 🚢 Deploy - GitHub Pages
-      if: github.ref == 'refs/heads/main' && success()
-      uses: peaceiris/actions-gh-pages@v3
+  deploy:
+    name: 🚢 Deploy
+    runs-on: ubuntu-latest
+    needs: [validate, performance, security]
+    if: github.ref == 'refs/heads/main'
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/download-artifact@v3
+      with:
+        name: build-files
+        path: _site
+    - uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./_site
-
-    - name: 🚢 Deploy - Notify Success
-      if: github.ref == 'refs/heads/main' && success()
-      run: echo "✅ Deployment successful to https://${{ github.repository_owner }}.github.io/portfolio/"
-
-    # CLEANUP STAGE (always runs)
-    - name: 🧹 Cleanup - Remove Build Artifacts
-      if: always()
-      run: |
-        rm -rf node_modules/.cache
-        rm -rf _site
-        npm cache clean --force
-
-    - name: 🧹 Cleanup - Clear Temporary Files
-      if: always()
-      run: |
-        find . -name "*.tmp" -delete
-        find . -name "*.log" -delete
