@@ -2,7 +2,7 @@ name: Portfolio CI/CD Pipeline
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ main, ft-develop ]
   pull_request:
     branches: [ main ]
 
