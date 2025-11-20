@@ -257,13 +257,12 @@
 .footer-copy {
     text-align: center;
     font-size: 0.9rem;
-    color: #bdc3c7;
 }
-
+/* 
 .footer-copy p {
-    color: #bdc3c7;
+    color: var(--dark-color);
 }
 
 #year {
-    color: #bdc3c7;
-}
+    color: var(--dark-color);
+} */

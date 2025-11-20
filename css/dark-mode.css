@@ -162,7 +162,7 @@ body.dark-mode .footer {
 }
 
 body.dark-mode .footer-copy {
-    color: var(--dark-text-secondary);
+    color: var(--dark-text);
 }
 
 /* Back to Top Button */
