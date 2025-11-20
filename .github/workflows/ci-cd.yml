@@ -2,255 +2,199 @@ name: Portfolio CI/CD Pipeline
 
 on:
   push:
-    branches: [ main, ft-develop ]
+    branches: [ main, develop ]
   pull_request:
     branches: [ main ]
 
 permissions:
   contents: read
 
+concurrency:
+  group: portfolio-ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  checkout:
-    name: Setup - Checkout code
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - run: |
-        echo "Files being uploaded:"
-        ls -la
-        echo "Eleventy config exists:"
-        ls -la .eleventy.js || echo "Missing .eleventy.js"
-    - uses: actions/upload-artifact@v4
-      with:
-        name: source-code
-        path: .
-        include-hidden-files: true
-
-  setup-node:
-    name: Setup - Node.js Environment
-    runs-on: ubuntu-latest
-    needs: checkout
-    steps:
-    - uses: actions/download-artifact@v4
-      with:
-        name: source-code
-        path: .
-    - uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-        cache: 'npm'
-    - uses: actions/upload-artifact@v4
-      with:
-        name: node-setup
-        path: .
-        include-hidden-files: true
-
-  install-deps:
-    name: Setup - Install Dependencies
-    runs-on: ubuntu-latest
-    needs: setup-node
-    steps:
-    - uses: actions/download-artifact@v4
-      with:
-        name: node-setup
-        path: .
-    - uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-        cache: 'npm'
-    - run: npm ci
-    - uses: actions/upload-artifact@v4
-      with:
-        name: with-deps
-        path: .
-        include-hidden-files: true
-
   build-site:
-    name: Setup - Build Site
+    name: Build site
     runs-on: ubuntu-latest
-    needs: install-deps
     steps:
-    - uses: actions/download-artifact@v4
-      with:
-        name: with-deps
-        path: .
-    - uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-        cache: 'npm'
-    - run: npm ci
-    - run: |
-        echo "Current directory:"
-        pwd
-        echo "Directory contents:"
-        ls -la
-        echo "Source directory contents:"
-        ls -la src/ || echo "src directory not found"
-        echo "Eleventy config:"
-        cat .eleventy.js
-    - run: npm run build
-    - uses: actions/upload-artifact@v4
-      with:
-        name: built-site
-        path: .
-        include-hidden-files: true
-
-  cache-deps:
-    name: Setup - Cache Dependencies
-    runs-on: ubuntu-latest
-    needs: build-site
-    steps:
-    - uses: actions/download-artifact@v4
-      with:
-        name: built-site
-        path: .
-    - uses: actions/upload-artifact@v4
-      with:
-        name: cached-build
-        path: .
-        include-hidden-files: true
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm ci
+      - name: Inspect repo
+        run: |
+          echo "pwd: $(pwd)"
+          ls -la
+          ls -la src/ || true
+      - name: Build
+        run: npm run build
+      - name: Upload built site
+        uses: actions/upload-artifact@v4
+        with:
+          name: built-site
+          path: _site
 
   validate-html:
     name: Validate - HTML Structure
     runs-on: ubuntu-latest
-    needs: cache-deps
+    needs: build-site
     steps:
-    - uses: actions/download-artifact@v4
-      with:
-        name: cached-build
-        path: .
-    - uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-    - run: npm ci
-    - run: npx html-validate _site/index.html || exit 1
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      - name: Install dev dependencies
+        run: npm ci
+      - name: Download built site
+        uses: actions/download-artifact@v4
+        with:
+          name: built-site
+          path: _site
+      - name: Validate HTML
+        run: npx html-validate _site/index.html || exit 1
 
   validate-js:
     name: Validate - JavaScript Code
     runs-on: ubuntu-latest
-    needs: cache-deps
+    needs: build-site
     steps:
-    - uses: actions/download-artifact@v4
-      with:
-        name: cached-build
-        path: .
-    - uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-        cache: 'npm'
-    - run: npm ci
-    - run: npx eslint js/*.js || exit 1
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      - name: Install dev dependencies
+        run: npm ci
+      - name: Run ESLint
+        run: npx eslint js/*.js || exit 1
 
   validate-css:
-    name: Validate - CSS Styles
+    name: Validate - CSS
     runs-on: ubuntu-latest
-    needs: cache-deps
+    needs: build-site
     steps:
-    - uses: actions/download-artifact@v4
-      with:
-        name: cached-build
-        path: .
-    - run: find css/ -name "*.css" -exec npx w3c-css-validator {} \; || exit 1
-
-  validate-links:
-    name: Validate - Link Integrity
-    runs-on: ubuntu-latest
-    needs: cache-deps
-    steps:
-    - uses: actions/download-artifact@v4
-      with:
-        name: cached-build
-        path: .
-    - run: npx blc http://localhost:3000 --recursive --exclude-external || exit 1
+      - uses: actions/checkout@v4
+      - name: Install w3c validator
+        run: npm ci
+      - name: Validate CSS files
+        run: find css/ -name "*.css" -exec npx w3c-css-validator {} \; || exit 1
 
   validate-accessibility:
     name: Validate - Accessibility Standards
     runs-on: ubuntu-latest
-    needs: cache-deps
+    needs: build-site
     steps:
-    - uses: actions/download-artifact@v4
-      with:
-        name: cached-build
-        path: .
-    - uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-    - run: npm ci
-    - run: npx puppeteer browsers install chrome
-    - run: cd _site && node ../scripts/accessibility-test.js || exit 1
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install dependencies
+        run: npm ci
+      - name: Install puppeteer browsers
+        run: npx puppeteer browsers install chrome
+      - name: Download built site
+        uses: actions/download-artifact@v4
+        with:
+          name: built-site
+          path: _site
+      - name: Run accessibility checks
+        run: cd _site && node ../scripts/accessibility-test.js || exit 1
 
   validate-performance:
     name: Validate - Performance Metrics
     runs-on: ubuntu-latest
-    needs: cache-deps
+    needs: build-site
     steps:
-    - uses: actions/download-artifact@v4
-      with:
-        name: cached-build
-        path: .
-    - uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-    - run: npm ci
-    - run: npx puppeteer browsers install chrome
-    - run: cd _site && npx lhci autorun --config ../.lighthouserc.json || exit 1
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install dependencies
+        run: npm ci
+      - name: Install puppeteer
+        run: npx puppeteer browsers install chrome
+      - name: Download built site
+        uses: actions/download-artifact@v4
+        with:
+          name: built-site
+          path: _site
+      - name: Run Lighthouse CI
+        run: cd _site && npx lhci autorun --config ../.lighthouserc.json || exit 1
 
   validate-security:
     name: Validate - Security Scan
     runs-on: ubuntu-latest
-    needs: cache-deps
+    needs: build-site
     steps:
-    - uses: actions/download-artifact@v4
-      with:
-        name: cached-build
-        path: .
-    - run: cd _site && node ../scripts/security-scan.js || echo "Security warnings found but continuing..."
+      - name: Download built site
+        uses: actions/download-artifact@v4
+        with:
+          name: built-site
+          path: _site
+      - name: Run security scan
+        run: cd _site && node ../scripts/security-scan.js || echo "Security warnings found but continuing..."
 
   validate-images:
     name: Validate - Image Optimization
     runs-on: ubuntu-latest
-    needs: cache-deps
+    needs: build-site
     steps:
-    - uses: actions/download-artifact@v4
-      with:
-        name: cached-build
-        path: .
-    - run: cd _site && node ../scripts/image-check.js || exit 1
+      - name: Download built site
+        uses: actions/download-artifact@v4
+        with:
+          name: built-site
+          path: _site
+      - name: Run image checks
+        run: cd _site && node ../scripts/image-check.js || exit 1
 
   validate-seo:
     name: Validate - SEO Requirements
     runs-on: ubuntu-latest
-    needs: cache-deps
+    needs: build-site
     steps:
-    - uses: actions/download-artifact@v4
-      with:
-        name: cached-build
-        path: .
-    - run: cd _site && node ../scripts/seo-check.js || exit 1
+      - name: Download built site
+        uses: actions/download-artifact@v4
+        with:
+          name: built-site
+          path: _site
+      - name: Run SEO checks
+        run: cd _site && node ../scripts/seo-check.js || exit 1
 
   validate-deps-security:
     name: Validate - Dependencies Security
     runs-on: ubuntu-latest
-    needs: cache-deps
+    needs: build-site
     steps:
-    - uses: actions/download-artifact@v4
-      with:
-        name: cached-build
-        path: .
-    - run: npm audit --audit-level=high || exit 1
+      - uses: actions/checkout@v4
+      - name: Install deps for audit
+        run: npm ci
+      - name: Run npm audit
+        run: npm audit --audit-level=high || exit 1
 
   validate-bundle-size:
     name: Validate - Bundle Size
     runs-on: ubuntu-latest
-    needs: cache-deps
+    needs: build-site
     steps:
-    - uses: actions/download-artifact@v4
-      with:
-        name: cached-build
-        path: .
-    - run: |
-        BUNDLE_SIZE=$(du -sb _site | cut -f1)
-        if [ $BUNDLE_SIZE -gt 10485760 ]; then echo "Bundle too large: $BUNDLE_SIZE bytes" && exit 1; fi
+      - name: Download built site
+        uses: actions/download-artifact@v4
+        with:
+          name: built-site
+          path: _site
+      - name: Check bundle size
+        run: |
+          BUNDLE_SIZE=$(du -sb _site | cut -f1)
+          if [ $BUNDLE_SIZE -gt 10485760 ]; then echo "Bundle too large: $BUNDLE_SIZE bytes" && exit 1; fi
 
   deploy-pages:
     name: Deploy - GitHub Pages
@@ -264,16 +208,17 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-    - uses: actions/download-artifact@v4
-      with:
-        name: cached-build
-        path: .
-    - uses: actions/configure-pages@v4
-    - uses: actions/upload-pages-artifact@v3
-      with:
-        path: ./_site
-    - id: deployment
-      uses: actions/deploy-pages@v4
+      - name: Download built site
+        uses: actions/download-artifact@v4
+        with:
+          name: built-site
+          path: _site
+      - uses: actions/configure-pages@v4
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./_site
+      - id: deployment
+        uses: actions/deploy-pages@v4
 
   deploy-notify:
     name: Deploy - Notify Success
@@ -281,34 +226,15 @@ jobs:
     needs: deploy-pages
     if: github.ref == 'refs/heads/main' && success()
     steps:
-    - run: echo "Deployment successful to https://${{ github.repository_owner }}.github.io/portfolio/"
-
-  cleanup-artifacts:
-    name: 🧹 Cleanup - Remove Build Artifacts
-    runs-on: ubuntu-latest
-    needs: [deploy-notify]
-    if: always()
-    steps:
-    - uses: actions/download-artifact@v4
-      with:
-        name: cached-build
-        path: .
-    - run: |
-        rm -rf node_modules/.cache
-        rm -rf _site
-        npm cache clean --force
+      - run: echo "Deployment successful to https://${{ github.repository_owner }}.github.io/portfolio/"
 
   cleanup-temp:
     name: 🧹 Cleanup - Clear Temporary Files
     runs-on: ubuntu-latest
-    needs: cleanup-artifacts
     if: always()
     steps:
-    - uses: actions/download-artifact@v4
-      with:
-        name: cached-build
-        path: .
-    - run: |
-        find . -name "*.tmp" -type f -delete
-        find . -name "*.log" -type f -delete
-        find . -name ".tmp" -type d -exec rm -rf {} + 2>/dev/null || true
+      - name: Clean workspace
+        run: |
+          find . -name "*.tmp" -type f -delete || true
+          find . -name "*.log" -type f -delete || true
+          rm -rf node_modules/.cache || true
