@@ -24,7 +24,7 @@ body.dark-mode .navbar {
 }
 
 body.dark-mode .logo-text {
-    color: var(--dark-text);
+    color: #ffffff;
 }
 
 body.dark-mode .nav-link {
