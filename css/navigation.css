@@ -35,7 +35,7 @@
     font-family: var(--font-primary);
     font-weight: 600;
     font-size: 0.9rem;
-    color: #1a1a1a;
+    color: var(--dark-color);
     line-height: 1;
     white-space: nowrap;
     transition: var(--transition);

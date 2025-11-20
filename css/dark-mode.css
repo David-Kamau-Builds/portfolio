@@ -24,7 +24,7 @@ body.dark-mode .navbar {
 }
 
 body.dark-mode .logo-text {
-    color: var(--dark-text);
+    color: #ffffff;
 }
 
 body.dark-mode .nav-link {
@@ -162,7 +162,7 @@ body.dark-mode .footer {
 }
 
 body.dark-mode .footer-copy {
-    color: var(--dark-text-secondary);
+    color: var(--dark-text);
 }
 
 /* Back to Top Button */
