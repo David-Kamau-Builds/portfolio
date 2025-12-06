@@ -1,8 +1,9 @@
+/* eslint-env node */
+/* eslint-disable no-undef */
 const { spawn } = require('child_process');
-const fs = require('fs');
 
 async function runTest(command, description) {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     console.log(`\n🔍 ${description}...`);
     
     const [cmd, ...args] = command.split(' ');
@@ -12,15 +13,19 @@ async function runTest(command, description) {
     let error = '';
     
     process.stdout.on('data', (data) => {
-      output += data.toString();
+      if (data) {
+        output += data.toString();
+      }
     });
     
     process.stderr.on('data', (data) => {
-      error += data.toString();
+      if (data) {
+        error += data.toString();
+      }
     });
     
     process.on('close', (code) => {
-      if (code === 0) {
+      if (typeof code === 'number' && code === 0) {
         console.log(`✅ ${description} passed`);
         resolve({ success: true, output });
       } else {

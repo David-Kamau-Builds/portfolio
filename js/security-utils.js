@@ -36,9 +36,13 @@ const SecurityUtils = {
    * @returns {string} - CSRF token
    */
   generateCSRFToken() {
-    const array = new Uint8Array(32);
-    crypto.getRandomValues(array);
-    return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
+    if (typeof crypto !== 'undefined' && crypto.getRandomValues) {
+      const array = new Uint8Array(32);
+      crypto.getRandomValues(array);
+      return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
+    }
+    // Fallback for environments without crypto API
+    return Date.now().toString(36) + Math.random().toString(36).substring(2);
   },
 
   /**
@@ -48,7 +52,18 @@ const SecurityUtils = {
    * @returns {boolean} - Whether token is valid
    */
   validateCSRFToken(token, sessionToken) {
-    return token === sessionToken && token.length === 64;
+    if (typeof token !== 'string' || typeof sessionToken !== 'string') {
+      return false;
+    }
+    if (token.length !== 64 || sessionToken.length !== 64) {
+      return false;
+    }
+    // Constant-time comparison to prevent timing attacks
+    let result = 0;
+    for (let i = 0; i < token.length; i++) {
+      result |= token.charCodeAt(i) ^ sessionToken.charCodeAt(i);
+    }
+    return result === 0;
   },
 
   /**

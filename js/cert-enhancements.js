@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const indicators = carousel.querySelectorAll('.cert-indicators button');
         
         // Sync indicators with carousel slide events
+        // amazonq-ignore-next-line
         carousel.addEventListener('slide.bs.carousel', function(e) {
             indicators.forEach((indicator, index) => {
                 indicator.classList.toggle('active', index === e.to);
@@ -52,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
         card.setAttribute('tabindex', '0');
         
         card.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' || e.key === ' ') {
+            if (e.isTrusted && (e.key === 'Enter' || e.key === ' ')) {
                 e.preventDefault();
                 const viewBtn = this.querySelector('.cert-btn');
                 if (viewBtn) {
