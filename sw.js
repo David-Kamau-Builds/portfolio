@@ -1,3 +1,6 @@
+/* eslint-env serviceworker */
+/* global self, caches, Response */
+
 const CACHE_NAME = 'portfolio-v2';
 const urlsToCache = [
     '/',
@@ -28,10 +31,18 @@ self.addEventListener('install', event => {
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then(cache => cache.addAll(urlsToCache))
+            .catch(error => {
+                console.error('Service worker installation failed:', error);
+            })
     );
 });
 
 self.addEventListener('fetch', event => {
+    // Only handle GET requests
+    if (event.request.method !== 'GET') {
+        return;
+    }
+    
     event.respondWith(
         caches.match(event.request)
             .then(response => {
@@ -39,6 +50,12 @@ self.addEventListener('fetch', event => {
                     return response;
                 }
                 return fetch(event.request);
+            })
+            .catch(() => {
+                return new Response('Network error', {
+                    status: 408,
+                    headers: { 'Content-Type': 'text/plain' }
+                });
             })
     );
 });

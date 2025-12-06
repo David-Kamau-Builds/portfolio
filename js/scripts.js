@@ -97,6 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Smooth scrolling for all links
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
+      if (!e.isTrusted) return;
       try {
         e.preventDefault();
         const targetId = this.getAttribute("href");
@@ -264,6 +265,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
     // Additional click outside handler for any missed clicks
     document.addEventListener('click', function(e) {
+      if (!e.isTrusted) return;
       try {
         if (navbarCollapse.classList.contains('show')) {
           // Check if click is outside the menu and not on the toggler
@@ -283,6 +285,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
     // Close menu on escape key
     document.addEventListener('keydown', function(e) {
+      if (!e.isTrusted) return;
       try {
         if (e.key === 'Escape' && navbarCollapse.classList.contains('show')) {
           const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
@@ -362,7 +365,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const portfolioItems = document.querySelectorAll(".portfolio-item");
 
     filterButtons.forEach((button) => {
-      button.addEventListener("click", function () {
+      button.addEventListener("click", function (e) {
+        if (!e.isTrusted) return;
         try {
           // Remove active class from all buttons
           filterButtons.forEach((btn) => {

@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Keyboard Navigation Support
     const enhanceKeyboardNavigation = () => {
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
+            if (e.isTrusted && e.key === 'Escape') {
                 // Close any open modals
                 const openModals = document.querySelectorAll('.modal.show');
                 openModals.forEach(modal => {
@@ -49,12 +49,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
         document.querySelectorAll('.modal').forEach(modal => {
             modal.addEventListener('touchstart', (e) => {
-                startX = e.touches[0].clientX;
-                currentModal = modal;
+                if (e.isTrusted && e.touches && e.touches.length > 0) {
+                    startX = e.touches[0].clientX;
+                    currentModal = modal;
+                }
             });
 
             modal.addEventListener('touchend', (e) => {
-                if (!currentModal) return;
+                if (!currentModal || !e.isTrusted || !e.changedTouches || e.changedTouches.length === 0) return;
                 
                 const endX = e.changedTouches[0].clientX;
                 const diff = startX - endX;

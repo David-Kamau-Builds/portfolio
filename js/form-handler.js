@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Close on overlay click
     overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) {
+      if (e.isTrusted && e.target === overlay) {
         overlay.remove();
       }
     });
@@ -267,11 +267,15 @@ document.addEventListener('DOMContentLoaded', function() {
   // Real-time validation
   const fields = form.querySelectorAll('input, textarea');
   fields.forEach(field => {
-    field.addEventListener('blur', () => validateField(field));
-    field.addEventListener('input', () => {
-      // Remove invalid class on input to provide immediate feedback
-      if (field.classList.contains('is-invalid')) {
-        field.classList.remove('is-invalid');
+    field.addEventListener('blur', (e) => {
+      if (e.isTrusted) validateField(field);
+    });
+    field.addEventListener('input', (e) => {
+      if (e.isTrusted) {
+        // Remove invalid class on input to provide immediate feedback
+        if (field.classList.contains('is-invalid')) {
+          field.classList.remove('is-invalid');
+        }
       }
     });
   });
@@ -286,7 +290,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Prevent form submission on Enter key in input fields (except textarea)
   form.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA' && e.target.type !== 'submit') {
+    if (e.isTrusted && e.key === 'Enter' && e.target.tagName !== 'TEXTAREA' && e.target.type !== 'submit') {
       e.preventDefault();
     }
   });

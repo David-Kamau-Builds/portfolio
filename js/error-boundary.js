@@ -13,24 +13,28 @@ class ErrorBoundary {
   init() {
     // Global error handler
     window.addEventListener('error', (event) => {
-      this.handleError({
-        message: event.message,
-        filename: event.filename,
-        lineno: event.lineno,
-        colno: event.colno,
-        error: event.error,
-        type: 'javascript'
-      });
+      if (event.isTrusted) {
+        this.handleError({
+          message: event.message,
+          filename: event.filename,
+          lineno: event.lineno,
+          colno: event.colno,
+          error: event.error,
+          type: 'javascript'
+        });
+      }
     });
 
     // Unhandled promise rejection handler
     window.addEventListener('unhandledrejection', (event) => {
-      this.handleError({
-        message: event.reason?.message || 'Unhandled promise rejection',
-        error: event.reason,
-        type: 'promise'
-      });
-      event.preventDefault();
+      if (event.isTrusted) {
+        this.handleError({
+          message: event.reason?.message || 'Unhandled promise rejection',
+          error: event.reason,
+          type: 'promise'
+        });
+        event.preventDefault();
+      }
     });
 
     // Resource loading errors
@@ -122,9 +126,16 @@ class ErrorBoundary {
     
     // Try to load fallback or show degraded functionality message
     if (script.dataset.fallback) {
-      const fallbackScript = document.createElement('script');
-      fallbackScript.src = script.dataset.fallback;
-      document.head.appendChild(fallbackScript);
+      try {
+        const url = new URL(script.dataset.fallback, window.location.origin);
+        if (url.protocol === 'https:' || url.protocol === 'http:') {
+          const fallbackScript = document.createElement('script');
+          fallbackScript.src = url.href;
+          document.head.appendChild(fallbackScript);
+        }
+      } catch {
+        console.error('Invalid fallback script URL');
+      }
     }
   }
 
@@ -133,10 +144,17 @@ class ErrorBoundary {
     
     // Load fallback CSS if available
     if (link.dataset.fallback) {
-      const fallbackLink = document.createElement('link');
-      fallbackLink.rel = 'stylesheet';
-      fallbackLink.href = link.dataset.fallback;
-      document.head.appendChild(fallbackLink);
+      try {
+        const url = new URL(link.dataset.fallback, window.location.origin);
+        if (url.protocol === 'https:' || url.protocol === 'http:') {
+          const fallbackLink = document.createElement('link');
+          fallbackLink.rel = 'stylesheet';
+          fallbackLink.href = url.href;
+          document.head.appendChild(fallbackLink);
+        }
+      } catch {
+        console.error('Invalid fallback stylesheet URL');
+      }
     }
   }
 

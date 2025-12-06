@@ -41,7 +41,9 @@ function enhanceClientSecurity() {
   // Disable right-click context menu in production
   if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
     document.addEventListener('contextmenu', (e) => {
-      e.preventDefault();
+      if (e.isTrusted) {
+        e.preventDefault();
+      }
     });
   }
   
