@@ -30,12 +30,12 @@
   "author": "David Washington Kamau",
   "license": "MIT",
   "devDependencies": {
-    "@11ty/eleventy": "^2.0.1",
-    "@axe-core/puppeteer": "^4.10.2",
+    "@11ty/eleventy": "^3.1.2",
+    "@axe-core/puppeteer": "^4.11.1",
     "@lhci/cli": "^0.15.1",
-    "eslint": "^9.0.0",
-    "html-validate": "^8.29.0",
-    "puppeteer": "^24.19.0",
-    "w3c-css-validator": "^1.0.0"
+    "eslint": "^10.0.0",
+    "html-validate": "^10.7.0",
+    "puppeteer": "^24.37.3",
+    "w3c-css-validator": "^1.4.1"
   }
 }
