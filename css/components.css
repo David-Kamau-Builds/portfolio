@@ -310,3 +310,9 @@
     height: 80vh;
     overflow-y: auto;
 }
+
+.cv-iframe {
+    width: 100%;
+    height: 500px;
+    border: none;
+}
