@@ -14,7 +14,6 @@
     "test:security": "node scripts/security-scan.js",
     "test:images": "node scripts/image-check.js",
     "test:seo": "node scripts/seo-check.js",
-    "lighthouse": "lhci autorun --config .lighthouserc.json",
     "test:pipeline": "node test-pipeline.js"
   },
   "repository": {
@@ -32,10 +31,9 @@
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",
     "@axe-core/puppeteer": "^4.11.1",
-    "@lhci/cli": "^0.15.1",
-    "eslint": "^10.0.0",
-    "html-validate": "^10.7.0",
-    "puppeteer": "^24.37.3",
+    "eslint": "^10.0.2",
+    "html-validate": "^10.9.0",
+    "puppeteer": "^24.37.5",
     "w3c-css-validator": "^1.4.1"
   }
 }
