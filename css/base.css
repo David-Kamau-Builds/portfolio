@@ -36,7 +36,18 @@ body {
     transition: opacity 0.3s ease-in-out;
 }
 
-h1, h2, h3, h4, h5, h6 {
+/* Lock background scroll when any modal is open */
+html.modal-open,
+body.modal-open {
+    overflow: hidden !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: var(--font-primary);
     font-weight: 700;
     line-height: 1.2;

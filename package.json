@@ -8,13 +8,12 @@
     "serve": "npx @11ty/eleventy --serve",
     "test": "npm run build && npm run test:html && npm run test:css && npm run test:js && npm run test:accessibility && npm run test:security && npm run test:images && npm run test:seo",
     "test:html": "html-validate _site/index.html --config .htmlvalidate.json",
-    "test:css": "find css/ -name '*.css' -exec w3c-css-validator {} \\;",
+    "test:css": "stylelint \"css/**/*.css\" --config .stylelintrc.json",
     "test:js": "eslint js/*.js",
     "test:accessibility": "node scripts/accessibility-test.js",
     "test:security": "node scripts/security-scan.js",
     "test:images": "node scripts/image-check.js",
-    "test:seo": "node scripts/seo-check.js",
-    "test:pipeline": "node test-pipeline.js"
+    "test:seo": "node scripts/seo-check.js"
   },
   "repository": {
     "type": "git",
@@ -34,6 +33,7 @@
     "eslint": "^10.0.2",
     "html-validate": "^10.9.0",
     "puppeteer": "^24.37.5",
-    "w3c-css-validator": "^1.4.1"
+    "stylelint": "^17.4.0",
+    "stylelint-config-standard": "^40.0.0"
   }
 }

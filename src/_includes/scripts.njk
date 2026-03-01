@@ -54,4 +54,12 @@
         console.error('Unhandled promise rejection:', e.reason);
         e.preventDefault(); // Prevent the default browser behavior
     });
+    // Lock background scroll when any modal is open
+    document.addEventListener('show.bs.modal', function() {
+        document.documentElement.classList.add('modal-open');
+    });
+    document.addEventListener('hidden.bs.modal', function() {
+        document.documentElement.classList.remove('modal-open');
+    });
+
 </script>

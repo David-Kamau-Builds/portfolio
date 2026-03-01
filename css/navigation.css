@@ -35,7 +35,8 @@
     font-family: var(--font-primary);
     font-weight: 600;
     font-size: 0.9rem;
-    color: var(--dark-color);
+    color: #1a1a1a;
+    background-color: #ffffff;
     line-height: 1;
     white-space: nowrap;
     transition: var(--transition);
@@ -150,7 +151,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     z-index: 1040;
     opacity: 0;
     visibility: hidden;
@@ -178,7 +179,7 @@ body.menu-open {
         z-index: 1051;
         margin-right: 0;
     }
-    
+
     .navbar-collapse {
         position: fixed;
         top: 0;
@@ -186,26 +187,26 @@ body.menu-open {
         width: 280px;
         height: 100vh;
         background: var(--white);
-        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
         transition: right 0.3s ease;
         padding: 2rem 1rem;
         z-index: 1050;
         overflow-y: auto;
     }
-    
+
     .navbar-collapse.show {
         right: 0;
     }
-    
+
     .navbar-nav {
         flex-direction: column;
         gap: 1rem;
         margin-top: 2rem;
     }
-    
+
     .nav-link {
         padding: 1rem;
-        border-bottom: 1px solid rgba(0,0,0,0.1);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         font-size: 1.1rem;
         width: 100%;
         text-align: left;
@@ -246,30 +247,30 @@ body.menu-open {
     .logo-text {
         font-size: 0.85rem;
     }
-    
+
     .navbar-toggler {
         padding: 0.4rem;
         width: 40px;
         height: 40px;
     }
-    
+
     .custom-hamburger {
         width: 22px;
         height: 14px;
     }
-    
+
     .hamburger-line {
         width: 22px;
     }
-    
+
     .navbar-toggler[aria-expanded="true"] .hamburger-line:nth-child(1) {
         transform: rotate(45deg) translate(4px, 4px);
     }
-    
+
     .navbar-toggler[aria-expanded="true"] .hamburger-line:nth-child(3) {
         transform: rotate(-45deg) translate(4px, -4px);
     }
-    
+
     .navbar-collapse {
         width: 260px;
     }
@@ -283,34 +284,34 @@ body.menu-open {
     .logo-text {
         font-size: 0.8rem;
     }
-    
+
     .navbar-toggler {
         padding: 0.3rem;
         width: 36px;
         height: 36px;
     }
-    
+
     .custom-hamburger {
         width: 20px;
         height: 12px;
     }
-    
+
     .hamburger-line {
         width: 20px;
     }
-    
+
     .navbar-toggler[aria-expanded="true"] .hamburger-line:nth-child(1) {
         transform: rotate(45deg) translate(3px, 3px);
     }
-    
+
     .navbar-toggler[aria-expanded="true"] .hamburger-line:nth-child(3) {
         transform: rotate(-45deg) translate(3px, -3px);
     }
-    
+
     .navbar-collapse {
         width: 240px;
     }
-    
+
     .nav-link {
         font-size: 1rem;
         padding: 0.8rem;

@@ -25,6 +25,7 @@ body.dark-mode .navbar {
 
 body.dark-mode .logo-text {
     color: #ffffff;
+    background-color: var(--dark-surface);
 }
 
 body.dark-mode .nav-link {
@@ -165,6 +166,11 @@ body.dark-mode .footer-copy {
     color: var(--dark-text);
 }
 
+body.dark-mode .footer-copy p,
+body.dark-mode #year {
+    background-color: var(--dark-surface-light);
+}
+
 /* Back to Top Button */
 body.dark-mode .back-to-top {
     background-color: var(--dark-primary);
@@ -212,7 +218,7 @@ body.dark-mode .skill-card h3 {
 
 body.dark-mode .skill-item {
     color: var(--dark-text-secondary);
-    border-bottom-color: rgba(255,255,255,0.1);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 
 body.dark-mode .skill-item:hover {

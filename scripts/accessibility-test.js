@@ -6,12 +6,13 @@ async function runAccessibilityTests() {
     args: ['--no-sandbox', '--disable-setuid-sandbox']
   });
   const page = await browser.newPage();
-  
+
   try {
-    await page.goto('file://' + process.cwd() + '/index.html');
-    
+    await page.goto('file://' + process.cwd() + '/_site/index.html');
+    await new Promise(resolve => setTimeout(resolve, 500));
+
     const results = await new AxePuppeteer(page).analyze();
-    
+
     if (results.violations.length > 0) {
       console.error('Accessibility violations found:');
       results.violations.forEach(violation => {
@@ -22,7 +23,7 @@ async function runAccessibilityTests() {
       });
       process.exit(1);
     }
-    
+
     console.log('✅ All accessibility tests passed');
   } catch (error) {
     console.error('Accessibility test failed:', error);
