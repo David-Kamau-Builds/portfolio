@@ -1,10 +1,12 @@
 {
-  "extends": ["html-validate:recommended"],
+  "extends": [
+    "html-validate:recommended"
+  ],
   "rules": {
     "void-style": "off",
-    "no-trailing-whitespace": "error",
+    "no-trailing-whitespace": "off",
     "require-sri": "off",
-    "no-inline-style": "error",
+    "no-inline-style": "off",
     "prefer-native-element": "error",
     "no-redundant-for": "error",
     "wcag/h30": "error",

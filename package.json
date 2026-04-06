@@ -33,6 +33,7 @@
     "eslint": "^10.0.2",
     "html-validate": "^10.9.0",
     "puppeteer": "^24.37.5",
+    "sharp-cli": "^5.2.0",
     "stylelint": "^17.4.0",
     "stylelint-config-standard": "^40.0.0"
   }
