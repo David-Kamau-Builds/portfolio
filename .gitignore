@@ -45,4 +45,4 @@ temp/
 
 # Files
 development.md
-test-pipeline.js
+test-pipeline.js.vscode/highlights*.json

@@ -1,26 +1,34 @@
 /* Responsive Design */
 
 /* Prevent horizontal scrolling */
-html, body {
+html,
+body {
     overflow-x: hidden;
     width: 100%;
 }
 
-.container, .container-fluid {
+.container-fluid {
     max-width: 100%;
+    overflow-x: hidden;
+}
+
+.container {
     overflow-x: hidden;
 }
 
 /* Enhanced Touch Targets */
 @media (max-width: 768px) {
-    .btn, .nav-link, .social-link {
+
+    .btn,
+    .nav-link,
+    .social-link {
         min-height: 44px;
         min-width: 44px;
         display: flex;
         align-items: center;
         justify-content: center;
     }
-    
+
     .timeline::before {
         left: 31px;
     }
@@ -39,7 +47,7 @@ html, body {
         font-size: 2rem;
         margin-bottom: 1.5rem;
     }
-    
+
     .cert-actions {
         flex-direction: column;
     }
@@ -66,7 +74,7 @@ html, body {
         margin-bottom: 0;
         margin-top: 0;
     }
-    
+
     .project-image img {
         height: 300px;
     }
@@ -80,7 +88,7 @@ html, body {
     .section-title {
         font-size: 2.8rem;
     }
-    
+
     .project-slide {
         padding: 0 30px;
     }
@@ -94,7 +102,7 @@ html, body {
     .section-padding {
         padding: 3rem 0;
     }
-    
+
     .backend-diagram {
         width: 90%;
     }
@@ -170,11 +178,11 @@ html, body {
         width: 100%;
         text-align: center;
     }
-    
+
     .navbar-brand {
         max-width: calc(100% - 45px);
     }
-    
+
     .logo-text {
         font-size: 0.75rem;
     }
