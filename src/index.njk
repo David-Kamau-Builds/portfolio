@@ -6,23 +6,59 @@ layout: base.njk
 
 <section id="about" class="about-section section-padding">
     <div class="container">
-        <div class="section-header" data-aos="fade-up">
-            <h2 class="section-title">About Me</h2>
-            <div class="section-divider"></div>
-        </div>
-        <div class="row align-items-center">
-            <div class="col-lg-5" data-aos="fade-right">
-                <div class="about-image">
-                    <img src="images/logo.svg" alt="David Washington Kamau" class="img-fluid rounded" loading="lazy">
+        <div class="row align-items-center justify-content-between">
+            <div class="col-lg-5 mb-5 mb-lg-0" data-aos="fade-right">
+                <div class="about-image-wrapper position-relative">
+                    <div class="about-image rounded-4 overflow-hidden shadow-lg border border-opacity-10 border-white">
+                        <img src="images/developer-avatar.JPG" alt="David Washington Kamau Portrait" class="img-fluid w-100" loading="lazy">
+                    </div>
+                    <!-- decorative dots -->
+                    <div class="dots-pattern position-absolute bottom-0 end-0 translate-middle-x mb-n4 me-n4 z-n1 text-primary">
+                        <svg width="100" height="100" viewBox="0 0 100 100" fill="currentColor">
+                           <pattern id="dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                               <circle cx="2" cy="2" r="2" />
+                           </pattern>
+                           <rect width="100" height="100" fill="url(#dots)" />
+                        </svg>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-6" data-aos="fade-left">
                 <div class="about-content">
-                    <p class="lead"><strong>Software Developer</strong> building solutions that convert clicks into value. Proficient in <strong>Reactive Java, HTML/CSS, JavaScript, PHP(Laravel), MySQL, Node.js, Express.Js, Postman, Python, React</strong> and <strong>AWS Cloud</strong> architecture.</p>
-                    <p>I craft <strong>user-first experiences</strong> with clean code and scalable backends. Currently exploring <strong>blockchain for public services</strong>.</p>
-                    <p><strong>Open to new opportunities</strong> where I can solve problems with technology. Let's build something impactful.</p>
-                    <div class="about-cta mt-4">
-                        <a href="#contact" class="btn btn-primary me-3">Let's Connect</a>
+                    <h2 class="section-title text-start mb-2">About Me</h2>
+                    <h4 class="text-primary mb-4 fw-medium">AWS Certified & Full Stack Maestro</h4>
+                    
+                    <p class="lead text-muted mb-4" style="font-size: 1.1rem; line-height: 1.8;">
+                        I am a <strong>Software Developer</strong> specializing in crafting solutions that convert clicks into value. I pride myself on building <strong>user-first experiences</strong> seamlessly integrated with scalable, secure cloud backends.
+                    </p>
+                    
+                    <div class="tech-stack-row mb-4">
+                        <p class="fw-semibold mb-2">Core Arsenal:</p>
+                        <div class="d-flex flex-wrap gap-2">
+                            <span class="custom-tech-badge">Java (Spring Boot)</span>
+                            <span class="custom-tech-badge">Laravel / PHP</span>
+                            <span class="custom-tech-badge">React & Next.js</span>
+                            <span class="custom-tech-badge">AWS Cloud</span>
+                        </div>
+                    </div>
+                    
+                    <div class="row g-4 mt-2 mb-5">
+                        <div class="col-6">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="fs-1 text-primary fw-bold">5+</div>
+                                <div class="text-muted lh-sm fw-medium fs-sm">Years<br>Experience</div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="fs-1 text-primary fw-bold">10+</div>
+                                <div class="text-muted lh-sm fw-medium fs-sm">Projects<br>Delivered</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="about-cta">
+                        <a href="#contact" class="btn btn-primary btn-lg custom-btn me-3">Let's Connect</a>
                     </div>
                 </div>
             </div>

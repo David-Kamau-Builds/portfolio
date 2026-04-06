@@ -24,7 +24,7 @@ async function runAccessibilityTests() {
       process.exit(1);
     }
 
-    console.log('✅ All accessibility tests passed');
+    console.log('All accessibility tests passed');
   } catch (error) {
     console.error('Accessibility test failed:', error);
     process.exit(1);

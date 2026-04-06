@@ -1,21 +1,68 @@
 <section id="hero" class="hero-section">
-    <div class="container">
-        <div class="hero-content">
-            <h1 class="hero-title">David Washington Kamau</h1>
-            <h2 class="hero-subtitle">Software Developer | Cloud Architect</h2>
-            <p class="hero-text">Building scalable solutions with a focus on user experience and cloud technologies</p>
-            <div class="hero-cta">
-                <a href="#projects" class="btn btn-primary btn-lg me-3">Explore My Projects</a>
-                <button type="button" class="btn btn-dark px-4 py-2 rounded-1 fw-medium" data-bs-toggle="modal" data-bs-target="#cvModal">
-                    <i class="bi bi-file-earmark-text me-2" aria-hidden="true"></i> View my CV
-                </button>
-                {% include "cv-modal.njk" %}
+    <!-- Abstract Background Effects -->
+    <div class="hero-bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+    
+    <div class="container position-relative z-1">
+        <div class="row align-items-center min-vh-100">
+            <!-- Left Side: Content -->
+            <div class="col-lg-6 hero-content text-start" data-aos="fade-right">
+                <h1 class="hero-title">David Washington<br><span class="text-gradient">Kamau</span></h1>
+                <h2 class="hero-subtitle mt-3">Full Stack Developer & Cloud Architect</h2>
+                <p class="hero-text opacity-75 mt-4">Merging clean code with scalable cloud architecture to build digital experiences that drive impact.</p>
+                
+                <div class="hero-cta mt-5 justify-content-start">
+                    <a href="#projects" class="btn btn-primary btn-lg custom-btn me-3">Explore Work <i class="fas fa-arrow-right ms-2"></i></a>
+                    <button type="button" class="btn btn-outline-dark btn-lg custom-btn-outline mt-3 mt-sm-0" data-bs-toggle="modal" data-bs-target="#cvModal">
+                        View CV <i class="fas fa-file-pdf ms-2"></i>
+                    </button>
+                </div>
+                
+                <div class="hero-socials mt-5">
+                    <a href="https://github.com/David-Kamau-Builds" target="_blank" rel="noopener" class="social-icon" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/davidwashingtonkamau/" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <!-- Right Side: Visuals -->
+            <div class="col-lg-6 d-none d-lg-block position-relative" data-aos="fade-left" data-aos-delay="200">
+                <div class="hero-image-wrapper">
+                    <div class="glass-card main-card">
+                        <div class="card-header">
+                            <div class="circles">
+                                <span class="circle red"></span>
+                                <span class="circle yellow"></span>
+                                <span class="circle green"></span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <code>
+                                <span class="keyword">const</span> <span class="variable">developer</span> = {<br>
+                                &nbsp;&nbsp;name: <span class="string">'David W. Kamau'</span>,<br>
+                                &nbsp;&nbsp;skills: [<span class="string">'AWS'</span>, <span class="string">'React'</span>, <span class="string">'Laravel'</span>],<br>
+                                &nbsp;&nbsp;hireable: <span class="keyword">true</span>,<br>
+                                &nbsp;&nbsp;passion: <span class="string">'Building Scale'</span><br>
+                                };<br>
+                                <span class="function">developer</span>.<span class="method">build</span>();
+                            </code>
+                        </div>
+                    </div>
+                    
+                    <!-- Floating Tech Badges -->
+                    <div class="floating-badge badge-aws"><i class="fab fa-aws"></i></div>
+                    <div class="floating-badge badge-node"><i class="fab fa-react"></i></div>
+                    <div class="floating-badge badge-react"><i class="fab fa-laravel"></i></div>
+                </div>
             </div>
         </div>
     </div>
+    
     <div class="hero-scroll">
         <a href="#about" class="scroll-down" title="Scroll down to About section" aria-label="Scroll down to About section">
-            <i class="fas fa-chevron-down"></i>
+            <i class="fas fa-arrow-down"></i>
         </a>
     </div>
 </section>

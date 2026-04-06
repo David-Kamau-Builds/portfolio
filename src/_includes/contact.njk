@@ -1,54 +1,55 @@
-<section id="contact" class="contact-section section-padding bg-light">
+<section id="contact" class="contact-section section-padding">
     <div class="container">
-        <div class="section-header" data-aos="fade-up">
-            <h2 class="section-title">Let's Connect</h2>
-            <div class="section-divider"></div>
-            <p class="section-subtitle">I'm open to new opportunities and collaborations</p>
-        </div>
-
-        <div class="row justify-content-center">
-            <div class="col-lg-6 col-md-8" data-aos="fade-up">
-                <div class="social-links mt-4 d-flex justify-content-center gap-5">
-                    <div class="text-center">
-                        <a href="https://linkedin.com/in/davidwashingtonkamau/" class="social-link mb-2" target="_blank" rel="noopener noreferrer" title="Visit my LinkedIn profile" aria-label="LinkedIn Profile">
-                            <i class="fab fa-linkedin" aria-hidden="true"></i>
+        <div class="row align-items-center justify-content-between">
+            <!-- Left Side: Let's Connect Text -->
+            <div class="col-lg-5 mb-5 mb-lg-0" data-aos="fade-right">
+                <div class="contact-header">
+                    <h2 class="section-title text-start mb-3">Let's build something <span class="text-gradient">amazing</span></h2>
+                    <p class="lead mb-4">I'm currently available for freelance work and full-time opportunities. If you have a project that needs some creative magic or solid cloud architecture, I'd love to hear about it.</p>
+                    
+                    <div class="contact-methods mt-5">
+                        <a href="https://linkedin.com/in/davidwashingtonkamau/" class="contact-method-card" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-linkedin"></i>
+                            <div>
+                                <h5>LinkedIn</h5>
+                                <span>Connect professionally</span>
+                            </div>
                         </a>
-                        <p class="small">LinkedIn</p>
-                    </div>
-                    <div class="text-center">
-                        <a href="https://github.com/David-Kamau-Builds" class="social-link mb-2" target="_blank" rel="noopener noreferrer" title="Visit my GitHub profile" aria-label="GitHub Profile">
-                            <i class="fab fa-github" aria-hidden="true"></i>
-                        </a>
-                        <p class="small">GitHub</p>
                     </div>
                 </div>
-
-                <form action="https://formspree.io/f/xdkejwde" method="post" class="contact-form" id="contactForm" novalidate>
-                    <div class="mb-3">
-                        <input type="text" class="form-control" placeholder="Your Name" name="name" required minlength="2" maxlength="100">
-                        <div class="invalid-feedback">Please provide a valid name (2-100 characters).</div>
-                    </div>
-                    <div class="mb-3">
-                        <input type="email" class="form-control" placeholder="Your Email" name="email" required maxlength="254">
-                        <div class="invalid-feedback">Please provide a valid email address.</div>
-                    </div>
-                    <div class="mb-3">
-                        <textarea class="form-control" rows="5" placeholder="Your Message" name="message" required minlength="10" maxlength="1000"></textarea>
-                        <div class="invalid-feedback">Please provide a message (10-1000 characters).</div>
-                    </div>
-                    <div class="mb-4">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="privacyCheck" required>
-                            <label class="form-check-label" for="privacyCheck">
-                                I agree to the processing of my personal data for contact purposes.
-                            </label>
+            </div>
+            
+            <!-- Right Side: Form Card -->
+            <div class="col-lg-6 m-5" data-aos="fade-left">
+                <div class="contact-form-wrapper glass-card p-4 p-md-5 mb-5">
+                    <h3 class="mb-4">Send me a message</h3>
+                    <form action="https://formspree.io/f/xdkejwde" method="post" class="contact-form custom-form" id="contactForm" novalidate>
+                        <div class="mb-4">
+                            <input type="text" class="form-control" id="nameInput" placeholder="Your Name" name="name" required minlength="2" maxlength="100">
+                            <div class="invalid-feedback">Please provide a valid name.</div>
                         </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary" id="submitBtn">
-                        <span class="btn-text">Send Message</span>
-                        <span class="btn-spinner spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
-                    </button>
-                </form>
+                        <div class="mb-4">
+                            <input type="email" class="form-control" id="emailInput" placeholder="Your Email" name="email" required maxlength="254">
+                            <div class="invalid-feedback">Please provide a valid email.</div>
+                        </div>
+                        <div class="mb-4">
+                            <textarea class="form-control" id="messageInput" placeholder="Your Message" name="message" style="height: 150px" required minlength="10" maxlength="1000"></textarea>
+                            <div class="invalid-feedback">Please provide a message.</div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="form-check custom-checkbox">
+                                <input class="form-check-input" type="checkbox" id="privacyCheck" required>
+                                <label class="form-check-label opacity-75" style="font-size: 0.85rem;" for="privacyCheck">
+                                    I agree to the processing of my personal data for contact purposes.
+                                </label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg w-100 custom-btn" id="submitBtn">
+                            <span class="btn-text">Send Message</span>
+                            <span class="btn-spinner spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

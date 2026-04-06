@@ -109,6 +109,10 @@
 .nav-link {
     font-family: var(--font-primary);
     font-weight: 500;
+    font-size: 1.1rem;
+    /* Bumping base nav link size */
+    letter-spacing: 0.3px;
+    /* Slightly improved tracking */
     color: var(--dark-color);
     padding: 0.5rem 1rem;
     position: relative;
