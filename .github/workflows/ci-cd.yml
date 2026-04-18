@@ -9,6 +9,9 @@ on:
 permissions:
   contents: read
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 concurrency:
   group: portfolio-ci-${{ github.ref }}
   cancel-in-progress: true
@@ -230,7 +233,7 @@ jobs:
       - run: echo "Deployment successful to https://${{ github.repository_owner }}.github.io/portfolio/"
 
   cleanup-temp:
-    name: 🧹 Cleanup - Clear Temporary Files
+    name: Cleanup - Clear Temporary Files
     runs-on: ubuntu-latest
     if: always()
     steps:
