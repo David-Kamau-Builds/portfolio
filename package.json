@@ -31,9 +31,13 @@
     "@11ty/eleventy": "^3.1.2",
     "@axe-core/puppeteer": "^4.11.1",
     "eslint": "^10.0.2",
-    "html-validate": "^10.9.0",
-    "puppeteer": "^24.37.5",
+    "html-validate": "^11.5.5",
+    "puppeteer": "^25.3.0",
     "stylelint": "^17.4.0",
     "stylelint-config-standard": "^40.0.0"
+  },
+  "dependencies": {
+    "liquidjs": "^10.27.1",
+    "markdown-it": "^14.3.0"
   }
 }
