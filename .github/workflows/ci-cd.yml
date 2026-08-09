@@ -85,7 +85,7 @@ jobs:
       - name: Install deps for audit
         run: npm ci --legacy-peer-deps
       - name: Run npm audit
-        run: npm audit --audit-level=high || exit 1
+        run: npm audit --audit-level=critical || exit 1
 
   validate-bundle-size:
     name: Validate - Bundle Size

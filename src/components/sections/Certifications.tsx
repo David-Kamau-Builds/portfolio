@@ -55,6 +55,7 @@ export default function Certifications({ isFullPage = false }: CertificationsPro
         <div className="flex flex-wrap justify-center gap-2 mb-10">
           {filterCategories.map((cat) => (
             <button
+              type="button"
               key={cat}
               onClick={() => setActiveFilter(cat)}
               className={`px-4 py-2 text-xs font-bold rounded-xl transition-all ${activeFilter === cat ? 'bg-primary text-white shadow-md' : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'}`}
@@ -105,7 +106,7 @@ export default function Certifications({ isFullPage = false }: CertificationsPro
                   </div>
                   
                   <div className="flex flex-wrap gap-2 mt-auto">
-                    <button onClick={() => setModalCert(cert)} className="px-3 py-1.5 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-xs font-medium rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                    <button type="button" onClick={() => setModalCert(cert)} className="px-3 py-1.5 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-xs font-medium rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
                       View Badge
                     </button>
                     {cert.verifyUrl ? (

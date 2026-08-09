@@ -78,7 +78,7 @@ export default function Navbar() {
     <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-white/80 dark:bg-gray-950/80 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.08)] border-b border-white/20 dark:border-gray-800/50 py-2' : 'bg-transparent py-4'}`}>
       <div className="container mx-auto px-6 md:px-12 max-w-7xl flex justify-between items-center">
         {/* Logo + Name */}
-        <Link href="/" className="flex items-center gap-2.5 group">
+        <Link href="/" className="flex items-center gap-2.5 group" aria-label="David W. Kamau Portfolio Home">
           <Image
             src="/portfolio/images/logo/my_logo.webp"
             alt="DWK Logo"
@@ -117,6 +117,7 @@ export default function Navbar() {
 
         {/* Mobile hamburger */}
         <button
+          type="button"
           className="lg:hidden text-2xl text-gray-800 dark:text-white w-10 h-10 flex items-center justify-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-expanded={isMenuOpen}
@@ -140,6 +141,7 @@ export default function Navbar() {
           <div className="flex justify-between items-center p-6 border-b border-gray-100 dark:border-gray-800">
             <span className="text-lg font-bold font-display text-gray-900 dark:text-white">Menu</span>
             <button
+              type="button"
               onClick={() => setIsMenuOpen(false)}
               className="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-300"
               aria-label="Close menu"

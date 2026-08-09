@@ -17,7 +17,7 @@ const outfit = Outfit({
 
 export const metadata = {
   metadataBase: new URL('https://david-kamau-builds.github.io/portfolio/'),
-  title: 'David Washington Kamau | Full Stack Developer & AWS Solutions Architect',
+  title: 'David Washington Kamau | Full Stack Developer & AWS Architect',
   description: 'Full Stack Developer at SoftClans Technologies specializing in Laravel, Java (Spring Boot), React, Terraform & AWS Cloud Architecture in Nairobi, Kenya.',
   keywords: 'David Washington Kamau, Full Stack Developer, AWS Certified Solutions Architect, SoftClans Technologies, Safaricom, Laravel, Java, Spring Boot, React, Next.js, Terraform, Nairobi, Kenya',
   authors: [{ name: 'David Washington Kamau' }],
@@ -28,7 +28,7 @@ export const metadata = {
     apple: '/portfolio/images/logo/favicon.svg',
   },
   openGraph: {
-    title: 'David Washington Kamau | Full Stack Developer & AWS Solutions Architect',
+    title: 'David Washington Kamau | Full Stack Developer & AWS Architect',
     description: 'Full Stack Developer at SoftClans Technologies specializing in Laravel, Java (Spring Boot), React, Terraform & AWS Cloud Architecture in Nairobi, Kenya.',
     url: 'https://david-kamau-builds.github.io/portfolio/',
     siteName: 'David Washington Kamau Portfolio',
@@ -45,7 +45,7 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'David Washington Kamau | Full Stack Developer & AWS Solutions Architect',
+    title: 'David Washington Kamau | Full Stack Developer & AWS Architect',
     description: 'Full Stack Developer at SoftClans Technologies specializing in Laravel, Java (Spring Boot), React, Terraform & AWS Cloud Architecture in Nairobi, Kenya.',
     images: ['/portfolio/images/avatar/developer-avatar.webp'],
   },

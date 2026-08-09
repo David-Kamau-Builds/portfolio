@@ -132,7 +132,7 @@ export default function Hero() {
 
             {/* Typewriter Role Header */}
             <h2 className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 font-medium mb-6 h-8 flex items-center gap-1">
-              <span>{displayText}</span>
+              <span>{displayText || 'Full Stack Developer & Cloud Architect'}</span>
               <span className="w-0.5 h-6 bg-primary animate-ping"></span>
             </h2>
 
@@ -168,16 +168,16 @@ export default function Hero() {
 
             {/* Social & Credly Links */}
             <div className="flex items-center gap-3">
-              <a href="https://github.com/David-Kamau-Builds" target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-800 hover:bg-primary/20 transition-all hover:scale-110" title="GitHub">
+              <a href="https://github.com/David-Kamau-Builds" target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-800 hover:bg-primary/20 transition-all hover:scale-110" title="GitHub" aria-label="GitHub">
                 <img src="/portfolio/svg/GitHub.svg" alt="GitHub" className="w-5 h-5 dark:invert" />
               </a>
-              <a href="https://linkedin.com/in/davidwashingtonkamau/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-800 hover:bg-primary/20 transition-all hover:scale-110" title="LinkedIn">
+              <a href="https://linkedin.com/in/davidwashingtonkamau/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-800 hover:bg-primary/20 transition-all hover:scale-110" title="LinkedIn" aria-label="LinkedIn">
                 <img src="/portfolio/svg/LinkedIn.svg" alt="LinkedIn" className="w-5 h-5" />
               </a>
-              <a href="https://www.credly.com/users/david.washington.kamau" target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-800 hover:bg-primary/20 transition-all hover:scale-110" title="Verified Credly Profile">
+              <a href="https://www.credly.com/users/david.washington.kamau" target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-800 hover:bg-primary/20 transition-all hover:scale-110" title="Verified Credly Profile" aria-label="Verified Credly Profile">
                 <img src="/portfolio/svg/Credly.svg" alt="Credly" className="w-5 h-5" />
               </a>
-              <a href="https://medium.com/@davidwashingtonkamau" target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-800 hover:bg-primary/20 transition-all hover:scale-110" title="Medium Articles">
+              <a href="https://medium.com/@davidwashingtonkamau" target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-800 hover:bg-primary/20 transition-all hover:scale-110" title="Medium Articles" aria-label="Medium Articles">
                 <img src="/portfolio/svg/Medium.svg" alt="Medium" className="w-5 h-5 dark:invert" />
               </a>
             </div>
@@ -203,18 +203,21 @@ export default function Hero() {
                 <div className="flex items-center gap-3">
                   <div className="flex gap-1 bg-white dark:bg-gray-900 p-1 rounded-lg border border-gray-200 dark:border-gray-800 transition-colors">
                     <button
+                      type="button"
                       onClick={() => setActiveTab('typescript')}
                       className={`px-3 py-1 text-xs font-mono rounded transition-colors ${activeTab === 'typescript' ? 'bg-primary text-white font-bold shadow-xs' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'}`}
                     >
                       1. Frontend
                     </button>
                     <button
+                      type="button"
                       onClick={() => setActiveTab('java')}
                       className={`px-3 py-1 text-xs font-mono rounded transition-colors ${activeTab === 'java' ? 'bg-primary text-white font-bold shadow-xs' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'}`}
                     >
                       2. Backend
                     </button>
                     <button
+                      type="button"
                       onClick={() => setActiveTab('terraform')}
                       className={`px-3 py-1 text-xs font-mono rounded transition-colors ${activeTab === 'terraform' ? 'bg-primary text-white font-bold shadow-xs' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'}`}
                     >
@@ -223,9 +226,11 @@ export default function Hero() {
                   </div>
 
                   <button
+                    type="button"
                     onClick={handleCopy}
                     className="p-1.5 text-xs text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white bg-gray-200/80 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 rounded-md transition-colors flex items-center gap-1.5"
                     title="Copy code to clipboard"
+                    aria-label="Copy code to clipboard"
                   >
                     {copied ? (
                       <>

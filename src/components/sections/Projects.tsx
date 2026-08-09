@@ -100,7 +100,7 @@ export default function Projects({ githubRepos = [], isFullPage = false }: Proje
                     if (link.variant === 'dropdown' && link.dropdownItems) {
                       return (
                         <div key={i} className="relative group/dropdown">
-                          <button className="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary-dark transition-colors flex items-center gap-2 shadow-sm">
+                          <button type="button" className="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary-dark transition-colors flex items-center gap-2 shadow-sm">
                             <i className={link.icon}></i> {link.label}
                           </button>
                           <div className="absolute bottom-full left-0 mb-2 w-48 bg-white dark:bg-gray-800 rounded shadow-xl border border-gray-100 dark:border-gray-700 opacity-0 invisible group-hover/dropdown:opacity-100 group-hover/dropdown:visible transition-all">

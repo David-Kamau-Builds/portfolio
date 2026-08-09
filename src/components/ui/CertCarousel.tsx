@@ -36,7 +36,7 @@ export default function CertCarousel({ certifications, onOpenModal }: CertCarous
                 ))}
               </div>
               <div className="flex justify-center gap-4 mt-auto">
-                <button onClick={() => onOpenModal(cert)} className="px-4 py-2 border border-primary text-primary text-sm font-medium rounded hover:bg-primary hover:text-white transition-colors">
+                <button type="button" onClick={() => onOpenModal(cert)} className="px-4 py-2 border border-primary text-primary text-sm font-medium rounded hover:bg-primary hover:text-white transition-colors">
                   View
                 </button>
                 {cert.verifyUrl ? (
@@ -54,16 +54,17 @@ export default function CertCarousel({ certifications, onOpenModal }: CertCarous
         </div>
       </div>
       
-      <button onClick={prev} className="absolute left-0 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center bg-white dark:bg-gray-800 text-primary shadow rounded-full z-10" aria-label="Previous">
+      <button type="button" onClick={prev} className="absolute left-0 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center bg-white dark:bg-gray-800 text-primary shadow rounded-full z-10" aria-label="Previous">
         <i className="fas fa-chevron-left"></i>
       </button>
-      <button onClick={next} className="absolute right-0 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center bg-white dark:bg-gray-800 text-primary shadow rounded-full z-10" aria-label="Next">
+      <button type="button" onClick={next} className="absolute right-0 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center bg-white dark:bg-gray-800 text-primary shadow rounded-full z-10" aria-label="Next">
         <i className="fas fa-chevron-right"></i>
       </button>
 
       <div className="flex justify-center gap-2 mt-4">
         {certifications.map((_, idx) => (
           <button 
+            type="button"
             key={idx} 
             onClick={() => setActiveIndex(idx)}
             className={`w-2 h-2 rounded-full transition-colors ${activeIndex === idx ? 'bg-primary' : 'bg-gray-300 dark:bg-gray-700'}`}
