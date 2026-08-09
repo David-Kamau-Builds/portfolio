@@ -22,7 +22,7 @@ export default async function ProjectsPage() {
   return (
     <div className="pt-8">
       <div className="container mx-auto px-6 md:px-12 max-w-7xl pt-4">
-        <Link href="/" className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-primary transition-colors">
+        <Link href="/" className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-primary transition-colors" aria-label="Back to Home">
           <i className="fas fa-arrow-left"></i> Back to Home
         </Link>
       </div>

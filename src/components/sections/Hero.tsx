@@ -280,7 +280,7 @@ export default function Hero() {
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
         <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Scroll</span>
-        <Link href="#about" className="flex items-center justify-center w-9 h-9 rounded-full border border-gray-300 dark:border-gray-700 text-gray-500 hover:text-primary hover:border-primary transition-all animate-bounce">
+        <Link href="#about" className="flex items-center justify-center w-9 h-9 rounded-full border border-gray-300 dark:border-gray-700 text-gray-500 hover:text-primary hover:border-primary transition-all animate-bounce" aria-label="Scroll to About section">
           <i className="fas fa-arrow-down text-xs"></i>
         </Link>
       </motion.div>
