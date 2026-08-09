@@ -5,6 +5,9 @@ on:
     branches: [ main, ft-develop ]
   pull_request:
     branches: [ main ]
+  schedule:
+    - cron: '0 * * * *' # Automatically rebuild and redeploy every hour
+  workflow_dispatch: # Allows manual trigger from GitHub Actions tab
 
 permissions:
   contents: read
