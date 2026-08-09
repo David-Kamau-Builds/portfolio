@@ -28,7 +28,7 @@ jobs:
           node-version: '22'
           cache: 'npm'
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --legacy-peer-deps
       - name: Build and Export
         run: npm run build
       - name: Upload built site
@@ -49,7 +49,7 @@ jobs:
           node-version: '22'
           cache: 'npm'
       - name: Install dev dependencies
-        run: npm ci
+        run: npm ci --legacy-peer-deps
       - name: Download built site
         uses: actions/download-artifact@v4
         with:
@@ -70,11 +70,11 @@ jobs:
           node-version: '22'
           cache: 'npm'
       - name: Install dev dependencies
-        run: npm ci
+        run: npm ci --legacy-peer-deps
       - name: Run TypeScript type-check
         run: npx tsc --noEmit || exit 1
       - name: Run ESLint
-        run: npx eslint src/ || exit 1
+        run: npx next lint || exit 1
 
   validate-deps-security:
     name: Validate - Dependencies Security
@@ -83,7 +83,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install deps for audit
-        run: npm ci
+        run: npm ci --legacy-peer-deps
       - name: Run npm audit
         run: npm audit --audit-level=high || exit 1
 
