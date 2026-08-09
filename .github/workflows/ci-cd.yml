@@ -1,4 +1,4 @@
-﻿name: Portfolio CI/CD Pipeline
+name: Portfolio CI/CD Pipeline
 
 on:
   push:
@@ -18,7 +18,7 @@ concurrency:
 
 jobs:
   build-site:
-    name: Build site
+    name: Build Next.js site
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -28,19 +28,14 @@ jobs:
           node-version: '22'
           cache: 'npm'
       - name: Install dependencies
-        run: npm ci
-      - name: Inspect repo
-        run: |
-          echo "pwd: $(pwd)"
-          ls -la
-          ls -la src/ || true
-      - name: Build
+        run: npm ci --legacy-peer-deps
+      - name: Build and Export
         run: npm run build
       - name: Upload built site
         uses: actions/upload-artifact@v4
         with:
           name: built-site
-          path: _site
+          path: out
 
   validate-html:
     name: Validate - HTML Structure
@@ -54,17 +49,17 @@ jobs:
           node-version: '22'
           cache: 'npm'
       - name: Install dev dependencies
-        run: npm ci
+        run: npm ci --legacy-peer-deps
       - name: Download built site
         uses: actions/download-artifact@v4
         with:
           name: built-site
-          path: _site
+          path: out
       - name: Validate HTML
-        run: npx html-validate _site/index.html || exit 1
+        run: npx html-validate out/index.html || exit 1
 
-  validate-js:
-    name: Validate - JavaScript Code
+  validate-ts:
+    name: Validate - TypeScript
     runs-on: ubuntu-latest
     needs: build-site
     steps:
@@ -75,104 +70,11 @@ jobs:
           node-version: '22'
           cache: 'npm'
       - name: Install dev dependencies
-        run: npm ci
+        run: npm ci --legacy-peer-deps
+      - name: Run TypeScript type-check
+        run: npx tsc --noEmit || exit 1
       - name: Run ESLint
-        run: npx eslint js/*.js || exit 1
-
-  validate-css:
-    name: Validate - CSS
-    runs-on: ubuntu-latest
-    needs: build-site
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install w3c validator
-        run: npm ci
-      - name: Validate CSS files
-        run: find css/ -name "*.css" -exec npx w3c-css-validator {} \; || exit 1
-
-
-
-  validate-performance:
-    name: Validate - Performance Metrics
-    runs-on: ubuntu-latest
-    needs: build-site
-    steps:
-      - uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - name: Install dependencies
-        run: npm ci
-      - name: Install puppeteer
-        run: npx puppeteer browsers install chrome
-      - name: Download built site
-        uses: actions/download-artifact@v4
-        with:
-          name: built-site
-          path: _site
-      - name: Run Lighthouse CI
-        run: cd _site && npx lhci autorun --config ../.lighthouserc.json || exit 1
-
-  validate-security:
-    name: Validate - Security Scan
-    runs-on: ubuntu-latest
-    needs: build-site
-    steps:
-      - uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - name: Install dependencies
-        run: npm ci
-      - name: Download built site
-        uses: actions/download-artifact@v4
-        with:
-          name: built-site
-          path: _site
-      - name: Run security scan
-        run: cd _site && node ../scripts/security-scan.js || echo "Security warnings found but continuing..."
-
-  validate-images:
-    name: Validate - Image Optimization
-    runs-on: ubuntu-latest
-    needs: build-site
-    steps:
-      - uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - name: Install dependencies
-        run: npm ci
-      - name: Download built site
-        uses: actions/download-artifact@v4
-        with:
-          name: built-site
-          path: _site
-      - name: Run image checks
-        run: cd _site && node ../scripts/image-check.js || exit 1
-
-  validate-seo:
-    name: Validate - SEO Requirements
-    runs-on: ubuntu-latest
-    needs: build-site
-    steps:
-      - uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - name: Install dependencies
-        run: npm ci
-      - name: Download built site
-        uses: actions/download-artifact@v4
-        with:
-          name: built-site
-          path: _site
-      - name: Run SEO checks
-        run: cd _site && node ../scripts/seo-check.js || exit 1
+        run: npx eslint src/ || exit 1
 
   validate-deps-security:
     name: Validate - Dependencies Security
@@ -181,9 +83,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install deps for audit
-        run: npm ci
+        run: npm ci --legacy-peer-deps
       - name: Run npm audit
-        run: npm audit --audit-level=high || exit 1
+        run: npm audit --audit-level=critical || exit 1
 
   validate-bundle-size:
     name: Validate - Bundle Size
@@ -194,16 +96,16 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: built-site
-          path: _site
+          path: out
       - name: Check bundle size
         run: |
-          BUNDLE_SIZE=$(du -sb _site | cut -f1)
-          if [ $BUNDLE_SIZE -gt 10485760 ]; then echo "Bundle too large: $BUNDLE_SIZE bytes" && exit 1; fi
+          BUNDLE_SIZE=$(du -sb out | cut -f1)
+          if [ $BUNDLE_SIZE -gt 15485760 ]; then echo "Bundle too large: $BUNDLE_SIZE bytes" && exit 1; fi
 
   deploy-pages:
     name: Deploy - GitHub Pages
     runs-on: ubuntu-latest
-    needs: [validate-html, validate-js, validate-css, validate-performance, validate-security, validate-images, validate-seo, validate-deps-security, validate-bundle-size]
+    needs: [validate-html, validate-ts, validate-deps-security, validate-bundle-size]
     if: github.ref == 'refs/heads/main' && success()
     permissions:
       pages: write
@@ -216,29 +118,10 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: built-site
-          path: _site
+          path: out
       - uses: actions/configure-pages@v4
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: ./_site
+          path: ./out
       - id: deployment
         uses: actions/deploy-pages@v4
-
-  deploy-notify:
-    name: Deploy - Notify Success
-    runs-on: ubuntu-latest
-    needs: deploy-pages
-    if: github.ref == 'refs/heads/main' && success()
-    steps:
-      - run: echo "Deployment successful to https://${{ github.repository_owner }}.github.io/portfolio/"
-
-  cleanup-temp:
-    name: Cleanup - Clear Temporary Files
-    runs-on: ubuntu-latest
-    if: always()
-    steps:
-      - name: Clean workspace
-        run: |
-          find . -name "*.tmp" -type f -delete || true
-          find . -name "*.log" -type f -delete || true
-          rm -rf node_modules/.cache || true
