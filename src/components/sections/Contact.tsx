@@ -43,10 +43,10 @@ export default function Contact() {
             </div>
 
             <h2 className="text-3xl md:text-4xl font-bold font-display text-gray-900 dark:text-white mb-4">
-              Let's build something <span className="text-primary">amazing</span>
+              Let&apos;s build something <span className="text-primary">amazing</span>
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
-              Whether you're looking for a Full-Stack Engineer, AWS Cloud Architect, or technical consultant, I'm just a message away.
+              Whether you&apos;re looking for a Full-Stack Engineer, AWS Cloud Architect, or technical consultant, I&apos;m just a message away.
             </p>
 
             <div className="space-y-4 mb-8">
@@ -98,7 +98,7 @@ export default function Contact() {
               {status === 'success' && (
                 <div className="mb-6 p-4 bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300 rounded-lg flex items-center gap-3">
                   <i className="fas fa-check-circle text-xl"></i>
-                  <span>Thanks for reaching out! I'll get back to you within 24 hours.</span>
+                  <span>Thanks for reaching out! I&apos;ll get back to you within 24 hours.</span>
                 </div>
               )}
 

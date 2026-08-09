@@ -129,7 +129,7 @@ export default function About() {
                 href="#contact"
                 className="inline-block px-8 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary-dark transition-colors shadow-lg"
               >
-                Let's Connect
+                Let&apos;s Connect
               </motion.a>
               <a
                 href="https://www.linkedin.com/in/davidwashingtonkamau"
