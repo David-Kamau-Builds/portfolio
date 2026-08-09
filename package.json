@@ -2,18 +2,12 @@
   "name": "@david-kamau-builds/portfolio",
   "version": "1.0.0",
   "description": "Professional portfolio of David Washington Kamau",
-  "main": "index.html",
+  "private": true,
   "scripts": {
-    "build": "npx @11ty/eleventy",
-    "serve": "npx @11ty/eleventy --serve",
-    "test": "npm run build && npm run test:html && npm run test:css && npm run test:js && npm run test:accessibility && npm run test:security && npm run test:images && npm run test:seo",
-    "test:html": "html-validate _site/index.html --config .htmlvalidate.json",
-    "test:css": "stylelint \"css/**/*.css\" --config .stylelintrc.json",
-    "test:js": "eslint js/*.js",
-    "test:accessibility": "node scripts/accessibility-test.js",
-    "test:security": "node scripts/security-scan.js",
-    "test:images": "node scripts/image-check.js",
-    "test:seo": "node scripts/seo-check.js"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "repository": {
     "type": "git",
@@ -27,17 +21,24 @@
   ],
   "author": "David Washington Kamau",
   "license": "MIT",
-  "devDependencies": {
-    "@11ty/eleventy": "^3.1.6",
-    "@axe-core/puppeteer": "^4.11.1",
-    "eslint": "^10.0.2",
-    "html-validate": "^11.5.5",
-    "puppeteer": "^25.3.0",
-    "stylelint": "^17.4.0",
-    "stylelint-config-standard": "^40.0.0"
-  },
   "dependencies": {
-    "liquidjs": "^10.27.1",
-    "markdown-it": "^14.3.0"
+    "framer-motion": "^13.0.0",
+    "next": "15.0.3",
+    "react": "19.0.0-rc-66855b96-20241106",
+    "react-dom": "19.0.0-rc-66855b96-20241106",
+    "rss-parser": "^3.13.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^8",
+    "eslint-config-next": "15.0.3",
+    "html-validate": "^11.5.5",
+    "postcss": "^8.5.26",
+    "puppeteer": "^25.3.0",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5"
   }
 }

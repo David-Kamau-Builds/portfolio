@@ -1,67 +1,38 @@
-# Security Implementation Summary
+# Security & Privacy Policy
 
-## Changes Made
+## Security Implementation & Privacy Overview
 
-### 1. Environment Variables for Credentials
-- Created `.env.example` template for secure credential management
-- Modified `form-handler.js` to use `process.env.FORM_ENDPOINT`
-- Added `.gitignore` to prevent committing sensitive files
+This repository hosts the personal developer portfolio of **David Washington Kamau** built using Next.js 15, React 19, TypeScript, and Tailwind CSS. The codebase is designed following modern web security practices, privacy protection guidelines, and client-side sanitization standards.
 
-### 2. Input Sanitization (XSS Prevention)
-- Created `security-utils.js` with comprehensive sanitization functions
-- Implemented HTML entity encoding for user inputs
-- Updated `error-boundary.js` to use safe DOM manipulation instead of innerHTML
-- Added input validation for email addresses
+---
 
-### 3. CSRF Token Protection
-- Generated unique CSRF tokens for each form session
-- Added hidden CSRF token field to contact forms
-- Implemented token validation in form submissions
+## Implemented Security & Privacy Measures
 
-### 4. Dependency Updates
-- Updated ESLint to version 9.0.0
-- Updated @axe-core/puppeteer to 4.10.2
-- Updated html-validate to 8.29.0
+### 1. Privacy Protection & Anti-Scraping Strategy
+- **Phone Number Protection**: Personal mobile numbers are excluded from public source code to prevent robocalls, SMS phishing (smishing), and harvester spam.
+- **Formspree Relay**: The contact form processes user inquiries via Formspree API relay, allowing direct communication without exposing private email credentials or backend server endpoints in client-side HTML.
+- **Location Privacy**: Only high-level geographic location (`Nairobi, Kenya`) is published.
 
-### 5. Path Traversal Prevention
-- Added path validation and normalization in `security-scan.js`
-- Implemented directory boundary checks
-- Added error handling for file operations
+### 2. Cross-Site Scripting (XSS) & Input Handling
+- **React Escaping**: All dynamic data in React components is escaped automatically before DOM insertion.
+- **Form Inputs**: Contact form fields (`name`, `email`, `message`) use strict HTML5 attribute constraints and input validation.
 
-### 6. Additional Security Measures
-- Created `content-security.js` with CSP policies
-- Added security headers configuration
-- Implemented client-side security enhancements
-- Added form data clearing on page unload
+### 3. Content Security & Privacy Headers
+- **External Resources**: External fonts, icons, and CDN stylesheets are loaded over HTTPS with Integrity (SRI) attributes where applicable.
+- **Static Export Isolation**: Built as a purely static site (`output: 'export'`), eliminating server-side injection attack vectors, remote code execution (RCE), or database compromise.
 
-## Security Headers Implemented
+### 4. Dependency Vulnerability Management
+- Regular `npm audit` scans are conducted to identify and patch vulnerable packages.
+- Dependencies are locked via `package-lock.json` for reproducible and secure builds.
 
-```
-X-Content-Type-Options: nosniff
-X-Frame-Options: DENY
-X-XSS-Protection: 1; mode=block
-Referrer-Policy: strict-origin-when-cross-origin
-Permissions-Policy: geolocation=(), microphone=(), camera=()
-Content-Security-Policy: [comprehensive policy]
-```
+---
 
-## Usage Instructions
+## Reporting a Vulnerability
 
-1. Copy `.env.example` to `.env` and configure your form endpoint
-2. Ensure all user inputs are processed through `SecurityUtils.sanitizeInput()`
-3. Validate CSRF tokens on the server side
-4. Run `npm audit` regularly to check for new vulnerabilities
-5. Update dependencies regularly using `npm update`
+If you discover a potential security vulnerability or misconfiguration within this repository or live site:
 
-## Files Modified/Created
+1. **Email Directly**: Send details to `david.washington.kamau@gmail.com` with the subject `[Security Vulnerability Report]`.
+2. **Include Details**: Provide a description of the issue, proof-of-concept steps, and potential impact.
+3. **Disclosure**: Please allow time to address and patch the issue before public disclosure.
 
-- `.env.example` - Environment variables template
-- `.gitignore` - Prevent sensitive file commits
-- `js/security-utils.js` - Input sanitization utilities
-- `js/content-security.js` - CSP and security headers
-- `js/form-handler.js` - CSRF protection and env variables
-- `js/error-boundary.js` - XSS prevention
-- `js/scripts.js` - Security script loading
-- `scripts/security-scan.js` - Path traversal prevention
-- `package.json` - Updated vulnerable dependencies
-- `SECURITY.md` - This documentation
+Thank you for helping keep open-source web applications safe!
