@@ -7,7 +7,7 @@ on:
     branches: [main]
   schedule:
     - cron: "0 4 * * *" # 6:00 AM EAT (UTC+3)
-    - cron: "0 16 * * *" # 6:00 PM EAT (UTC+3)
+    # - cron: "0 16 * * *" # 6:00 PM EAT (UTC+3)
   workflow_dispatch: # Allows manual trigger from GitHub Actions tab
 
 permissions:
