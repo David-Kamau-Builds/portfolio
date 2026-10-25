@@ -8,11 +8,13 @@ import BackToTop from '@/components/layout/BackToTop';
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
+  display: 'swap',
 });
 
 const outfit = Outfit({
   subsets: ['latin'],
   variable: '--font-outfit',
+  display: 'swap',
 });
 
 export const metadata = {
@@ -81,6 +83,8 @@ export default function RootLayout({
         <link rel="icon" href="/portfolio/images/logo/favicon.svg" type="image/svg+xml" />
         <link rel="shortcut icon" href="/portfolio/images/logo/favicon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/portfolio/images/logo/favicon.svg" />
+        <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossOrigin="anonymous" referrerPolicy="no-referrer" />
         <script
           type="application/ld+json"

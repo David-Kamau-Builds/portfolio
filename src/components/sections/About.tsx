@@ -79,7 +79,7 @@ export default function About() {
             </div>
 
             <h2 className="text-3xl md:text-4xl font-bold font-display mb-2 text-gray-900 dark:text-white">About Me</h2>
-            <h4 className="text-xl text-primary font-medium mb-6">AWS Certified Solutions Architect &amp; Full-Stack Developer</h4>
+            <h3 className="text-xl text-primary font-medium mb-6">AWS Certified Solutions Architect &amp; Full-Stack Developer</h3>
 
             <p className="text-lg text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
               I am a <strong className="text-gray-900 dark:text-gray-200">Full-Stack Software Developer</strong> currently building enterprise web applications and business systems at <strong className="text-gray-900 dark:text-gray-200">SoftClans Technologies</strong>.

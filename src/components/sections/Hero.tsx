@@ -118,12 +118,7 @@ export default function Hero() {
         <div className="flex flex-col lg:flex-row items-center gap-12">
 
           {/* Left Column: Text & Hero Content */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="w-full lg:w-1/2 text-left"
-          >
+          <div className="w-full lg:w-1/2 text-left">
             {/* Live Status Pill */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-primary/10 text-primary rounded-full text-xs font-bold uppercase tracking-wider mb-6">
               <i className="fas fa-briefcase text-xs"></i>
@@ -187,7 +182,7 @@ export default function Hero() {
                 <Image src="/portfolio/svg/Medium.svg" alt="Medium" width={20} height={20} className="w-5 h-5 dark:invert" />
               </a>
             </div>
-          </motion.div>
+          </div>
 
           {/* Right Column: Interactive Tabbed Code Block */}
           <motion.div

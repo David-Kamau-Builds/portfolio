@@ -17,7 +17,7 @@ export default function CertModal({ isOpen, onClose, title, image }: CertModalPr
       
       <div className="relative bg-white dark:bg-gray-900 rounded-2xl shadow-2xl overflow-hidden max-w-4xl w-full max-h-[90vh] flex flex-col animate-fade-in-up" onClick={e => e.stopPropagation()}>
         <div className="flex justify-between items-center p-4 border-b border-gray-100 dark:border-gray-800">
-          <h5 className="text-xl font-bold text-gray-900 dark:text-white">{title}</h5>
+          <h3 className="text-xl font-bold text-gray-900 dark:text-white">{title}</h3>
           <button type="button" onClick={onClose} className="text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors p-2" aria-label="Close">
             <i className="fas fa-times text-xl"></i>
           </button>
