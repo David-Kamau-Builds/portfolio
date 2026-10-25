@@ -2,6 +2,7 @@
 
 import { experience } from '@/data/experience';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export default function Experience() {
   // Calculate duration from period string
@@ -55,9 +56,11 @@ export default function Experience() {
                 <div className="flex items-start gap-4">
                   {/* Company Logo / Icon Badge */}
                   {job.logoUrl ? (
-                    <img 
+                    <Image 
                       src={job.logoUrl} 
                       alt={`${job.company} logo`} 
+                      width={48}
+                      height={48}
                       className="w-12 h-12 object-contain flex-shrink-0"
                     />
                   ) : (

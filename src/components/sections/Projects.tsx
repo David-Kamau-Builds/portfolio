@@ -2,6 +2,7 @@
 
 import { projects } from '@/data/projects';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 interface ProjectsProps {
@@ -67,7 +68,7 @@ export default function Projects({ githubRepos = [], isFullPage = false }: Proje
                   {project.techIcons.map((tech, i) => (
                     <div key={i} className="flex flex-col items-center gap-2 text-gray-500 dark:text-gray-400">
                       {tech.svg ? (
-                        <img src={tech.svg} alt={tech.label} className="w-10 h-10 object-contain group-hover:scale-110 transition-transform duration-300" />
+                        <Image src={tech.svg} alt={tech.label} width={40} height={40} className="w-10 h-10 object-contain group-hover:scale-110 transition-transform duration-300" />
                       ) : (
                         <i className={`${tech.icon} text-4xl group-hover:text-primary transition-colors duration-300`}></i>
                       )}

@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 
 interface CertModalProps {
   isOpen: boolean;
@@ -23,7 +24,7 @@ export default function CertModal({ isOpen, onClose, title, image }: CertModalPr
         </div>
         
         <div className="p-4 overflow-y-auto flex-grow flex justify-center items-center bg-gray-50 dark:bg-gray-950">
-          <img src={image} alt={title} className="max-w-full h-auto object-contain rounded" />
+          <Image src={image} alt={title} width={600} height={450} className="max-w-full h-auto object-contain rounded" />
         </div>
         
         <div className="p-4 border-t border-gray-100 dark:border-gray-800 flex justify-end">

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 
@@ -136,8 +137,9 @@ export default function Hero() {
 
             {/* Typewriter Role Header */}
             <h2 className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 font-medium mb-6 h-8 flex items-center gap-1">
-              <span>{displayText || '\u00A0'}</span>
-              <span className="w-0.5 h-6 bg-primary animate-ping"></span>
+              <span className="sr-only">Full Stack Developer & Cloud Architect</span>
+              <span aria-hidden="true">{displayText}</span>
+              <span aria-hidden="true" className="w-0.5 h-6 bg-primary animate-ping"></span>
             </h2>
 
             <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-lg leading-relaxed">
@@ -173,16 +175,16 @@ export default function Hero() {
             {/* Social & Credly Links */}
             <div className="flex items-center gap-3">
               <a href="https://github.com/David-Kamau-Builds" target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-800 hover:bg-primary/20 transition-all hover:scale-110" title="GitHub" aria-label="GitHub">
-                <img src="/portfolio/svg/GitHub.svg" alt="GitHub" className="w-5 h-5 dark:invert" />
+                <Image src="/portfolio/svg/GitHub.svg" alt="GitHub" width={20} height={20} className="w-5 h-5 dark:invert" />
               </a>
               <a href="https://linkedin.com/in/davidwashingtonkamau/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-800 hover:bg-primary/20 transition-all hover:scale-110" title="LinkedIn" aria-label="LinkedIn">
-                <img src="/portfolio/svg/LinkedIn.svg" alt="LinkedIn" className="w-5 h-5" />
+                <Image src="/portfolio/svg/LinkedIn.svg" alt="LinkedIn" width={20} height={20} className="w-5 h-5" />
               </a>
               <a href="https://www.credly.com/users/david.washington.kamau" target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-800 hover:bg-primary/20 transition-all hover:scale-110" title="Verified Credly Profile" aria-label="Verified Credly Profile">
-                <img src="/portfolio/svg/Credly.svg" alt="Credly" className="w-5 h-5" />
+                <Image src="/portfolio/svg/Credly.svg" alt="Credly" width={20} height={20} className="w-5 h-5" />
               </a>
               <a href="https://medium.com/@davidwashingtonkamau" target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-800 hover:bg-primary/20 transition-all hover:scale-110" title="Medium Articles" aria-label="Medium Articles">
-                <img src="/portfolio/svg/Medium.svg" alt="Medium" className="w-5 h-5 dark:invert" />
+                <Image src="/portfolio/svg/Medium.svg" alt="Medium" width={20} height={20} className="w-5 h-5 dark:invert" />
               </a>
             </div>
           </motion.div>

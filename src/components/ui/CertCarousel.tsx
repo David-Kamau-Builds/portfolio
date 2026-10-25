@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import Image from 'next/image';
 import { Cert } from '@/data/certifications';
 
 interface CertCarouselProps {
@@ -25,7 +26,7 @@ export default function CertCarousel({ certifications, onOpenModal }: CertCarous
           {certifications.map((cert, idx) => (
             <div key={idx} className="w-full flex-shrink-0 p-6 flex flex-col">
               <div className="h-48 mb-6 flex justify-center items-center bg-gray-50 dark:bg-gray-800 rounded-lg p-2">
-                <img src={cert.image} alt={cert.title} className="max-h-full object-contain" />
+                <Image src={cert.image} alt={cert.title} width={160} height={160} className="max-h-full w-auto object-contain" />
               </div>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 text-center">{cert.title}</h3>
               <div className="flex flex-wrap justify-center gap-2 mb-6">
