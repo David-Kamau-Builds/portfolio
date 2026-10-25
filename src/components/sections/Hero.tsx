@@ -75,21 +75,25 @@ export default function Hero() {
     const currentRole = roles[roleIndex];
     let timer: NodeJS.Timeout;
 
-    if (isDeleting) {
+    if (!isDeleting && displayText === currentRole) {
+      // Pause at full word before deleting
+      timer = setTimeout(() => {
+        setIsDeleting(true);
+      }, 1800);
+    } else if (isDeleting && displayText === '') {
+      // Completed backspacing, switch to next role and pause briefly before typing
+      setIsDeleting(false);
+      setRoleIndex((prev) => (prev + 1) % roles.length);
+    } else if (isDeleting) {
+      // Backspacing
       timer = setTimeout(() => {
         setDisplayText(currentRole.substring(0, displayText.length - 1));
       }, 40);
     } else {
+      // Typing
       timer = setTimeout(() => {
         setDisplayText(currentRole.substring(0, displayText.length + 1));
       }, 80);
-    }
-
-    if (!isDeleting && displayText === currentRole) {
-      timer = setTimeout(() => setIsDeleting(true), 1800);
-    } else if (isDeleting && displayText === '') {
-      setIsDeleting(false);
-      setRoleIndex((prev) => (prev + 1) % roles.length);
     }
 
     return () => clearTimeout(timer);
@@ -132,7 +136,7 @@ export default function Hero() {
 
             {/* Typewriter Role Header */}
             <h2 className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 font-medium mb-6 h-8 flex items-center gap-1">
-              <span>{displayText || 'Full Stack Developer & Cloud Architect'}</span>
+              <span>{displayText || '\u00A0'}</span>
               <span className="w-0.5 h-6 bg-primary animate-ping"></span>
             </h2>
 
