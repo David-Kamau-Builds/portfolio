@@ -56,7 +56,7 @@ export default function Contact() {
                   <i className="fas fa-envelope"></i>
                 </div>
                 <div>
-                  <h5 className="font-bold text-gray-900 dark:text-white text-sm">Email Me</h5>
+                  <span className="font-bold text-gray-900 dark:text-white text-sm block">Email Me</span>
                   <span className="text-gray-600 dark:text-gray-400 text-sm font-mono">david.washington.kamau@gmail.com</span>
                 </div>
               </a>
@@ -67,7 +67,7 @@ export default function Contact() {
                   <i className="fas fa-map-marker-alt"></i>
                 </div>
                 <div>
-                  <h5 className="font-bold text-gray-900 dark:text-white text-sm">Location</h5>
+                  <span className="font-bold text-gray-900 dark:text-white text-sm block">Location</span>
                   <span className="text-gray-600 dark:text-gray-400 text-sm">Nairobi, Kenya</span>
                 </div>
               </div>
@@ -78,7 +78,7 @@ export default function Contact() {
                   <i className="fab fa-linkedin-in"></i>
                 </div>
                 <div>
-                  <h5 className="font-bold text-gray-900 dark:text-white text-sm">LinkedIn</h5>
+                  <span className="font-bold text-gray-900 dark:text-white text-sm block">LinkedIn</span>
                   <span className="text-gray-600 dark:text-gray-400 text-sm">linkedin.com/in/davidwashingtonkamau</span>
                 </div>
               </a>

@@ -2,6 +2,7 @@
 
 import { volunteerRoles } from '@/data/volunteer';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export default function Volunteer() {
   return (
@@ -31,9 +32,11 @@ export default function Volunteer() {
             >
               {/* Organization Logo / Icon */}
               {vol.logoUrl ? (
-                <img 
+                <Image 
                   src={vol.logoUrl} 
                   alt={`${vol.organization} logo`} 
+                  width={48}
+                  height={48}
                   className="w-12 h-12 object-contain mb-5 flex-shrink-0"
                 />
               ) : (

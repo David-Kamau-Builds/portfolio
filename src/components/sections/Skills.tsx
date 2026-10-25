@@ -2,6 +2,7 @@
 
 import { skills } from '@/data/skills';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export default function Skills() {
   return (
@@ -53,7 +54,7 @@ export default function Skills() {
                     <div className="flex items-center gap-3.5 min-w-0">
                       {item.svg ? (
                         <div className="w-8 h-8 flex-shrink-0 flex items-center justify-center p-1.5 rounded-lg bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 shadow-2xs group-hover/item:scale-110 transition-transform">
-                          <img src={item.svg} alt={item.name} className="w-full h-full object-contain" />
+                          <Image src={item.svg} alt={item.name} width={24} height={24} className="w-full h-full object-contain" />
                         </div>
                       ) : (
                         <div className="w-8 h-8 flex-shrink-0 flex items-center justify-center rounded-lg bg-primary/10 text-primary text-xs">

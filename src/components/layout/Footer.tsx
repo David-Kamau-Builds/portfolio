@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -29,16 +30,16 @@ export default function Footer() {
 
           <div className="flex items-center gap-4">
             <a href="https://github.com/David-Kamau-Builds" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity" title="GitHub" aria-label="GitHub">
-              <img src="/portfolio/svg/GitHub.svg" alt="GitHub" className="w-5 h-5 dark:invert" />
+              <Image src="/portfolio/svg/GitHub.svg" alt="GitHub" width={20} height={20} className="w-5 h-5 dark:invert" />
             </a>
             <a href="https://linkedin.com/in/davidwashingtonkamau/" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity" title="LinkedIn" aria-label="LinkedIn">
-              <img src="/portfolio/svg/LinkedIn.svg" alt="LinkedIn" className="w-5 h-5" />
+              <Image src="/portfolio/svg/LinkedIn.svg" alt="LinkedIn" width={20} height={20} className="w-5 h-5" />
             </a>
             <a href="https://www.credly.com/users/david.washington.kamau" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity" title="Credly" aria-label="Credly">
-              <img src="/portfolio/svg/Credly.svg" alt="Credly" className="w-5 h-5" />
+              <Image src="/portfolio/svg/Credly.svg" alt="Credly" width={20} height={20} className="w-5 h-5" />
             </a>
             <a href="https://medium.com/@davidwashingtonkamau" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity" title="Medium" aria-label="Medium">
-              <img src="/portfolio/svg/Medium.svg" alt="Medium" className="w-5 h-5 dark:invert" />
+              <Image src="/portfolio/svg/Medium.svg" alt="Medium" width={20} height={20} className="w-5 h-5 dark:invert" />
             </a>
           </div>
         </div>

@@ -2,6 +2,7 @@
 
 import { education } from '@/data/education';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export default function Education() {
   return (
@@ -31,9 +32,11 @@ export default function Education() {
               <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-6">
                 <div className="flex gap-4 items-start">
                   {edu.logoUrl ? (
-                    <img 
+                    <Image 
                       src={edu.logoUrl} 
                       alt={`${edu.institution} logo`} 
+                      width={56}
+                      height={56}
                       className="w-14 h-14 object-contain flex-shrink-0"
                     />
                   ) : (

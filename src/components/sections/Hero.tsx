@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 
@@ -75,21 +76,25 @@ export default function Hero() {
     const currentRole = roles[roleIndex];
     let timer: NodeJS.Timeout;
 
-    if (isDeleting) {
+    if (!isDeleting && displayText === currentRole) {
+      // Pause at full word before deleting
+      timer = setTimeout(() => {
+        setIsDeleting(true);
+      }, 1800);
+    } else if (isDeleting && displayText === '') {
+      // Completed backspacing, switch to next role and pause briefly before typing
+      setIsDeleting(false);
+      setRoleIndex((prev) => (prev + 1) % roles.length);
+    } else if (isDeleting) {
+      // Backspacing
       timer = setTimeout(() => {
         setDisplayText(currentRole.substring(0, displayText.length - 1));
       }, 40);
     } else {
+      // Typing
       timer = setTimeout(() => {
         setDisplayText(currentRole.substring(0, displayText.length + 1));
       }, 80);
-    }
-
-    if (!isDeleting && displayText === currentRole) {
-      timer = setTimeout(() => setIsDeleting(true), 1800);
-    } else if (isDeleting && displayText === '') {
-      setIsDeleting(false);
-      setRoleIndex((prev) => (prev + 1) % roles.length);
     }
 
     return () => clearTimeout(timer);
@@ -113,12 +118,7 @@ export default function Hero() {
         <div className="flex flex-col lg:flex-row items-center gap-12">
 
           {/* Left Column: Text & Hero Content */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="w-full lg:w-1/2 text-left"
-          >
+          <div className="w-full lg:w-1/2 text-left">
             {/* Live Status Pill */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-primary/10 text-primary rounded-full text-xs font-bold uppercase tracking-wider mb-6">
               <i className="fas fa-briefcase text-xs"></i>
@@ -132,8 +132,9 @@ export default function Hero() {
 
             {/* Typewriter Role Header */}
             <h2 className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 font-medium mb-6 h-8 flex items-center gap-1">
-              <span>{displayText || 'Full Stack Developer & Cloud Architect'}</span>
-              <span className="w-0.5 h-6 bg-primary animate-ping"></span>
+              <span className="sr-only">Full Stack Developer & Cloud Architect</span>
+              <span aria-hidden="true">{displayText}</span>
+              <span aria-hidden="true" className="w-0.5 h-6 bg-primary animate-ping"></span>
             </h2>
 
             <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-lg leading-relaxed">
@@ -169,19 +170,19 @@ export default function Hero() {
             {/* Social & Credly Links */}
             <div className="flex items-center gap-3">
               <a href="https://github.com/David-Kamau-Builds" target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-800 hover:bg-primary/20 transition-all hover:scale-110" title="GitHub" aria-label="GitHub">
-                <img src="/portfolio/svg/GitHub.svg" alt="GitHub" className="w-5 h-5 dark:invert" />
+                <Image src="/portfolio/svg/GitHub.svg" alt="GitHub" width={20} height={20} className="w-5 h-5 dark:invert" />
               </a>
               <a href="https://linkedin.com/in/davidwashingtonkamau/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-800 hover:bg-primary/20 transition-all hover:scale-110" title="LinkedIn" aria-label="LinkedIn">
-                <img src="/portfolio/svg/LinkedIn.svg" alt="LinkedIn" className="w-5 h-5" />
+                <Image src="/portfolio/svg/LinkedIn.svg" alt="LinkedIn" width={20} height={20} className="w-5 h-5" />
               </a>
               <a href="https://www.credly.com/users/david.washington.kamau" target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-800 hover:bg-primary/20 transition-all hover:scale-110" title="Verified Credly Profile" aria-label="Verified Credly Profile">
-                <img src="/portfolio/svg/Credly.svg" alt="Credly" className="w-5 h-5" />
+                <Image src="/portfolio/svg/Credly.svg" alt="Credly" width={20} height={20} className="w-5 h-5" />
               </a>
               <a href="https://medium.com/@davidwashingtonkamau" target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-800 hover:bg-primary/20 transition-all hover:scale-110" title="Medium Articles" aria-label="Medium Articles">
-                <img src="/portfolio/svg/Medium.svg" alt="Medium" className="w-5 h-5 dark:invert" />
+                <Image src="/portfolio/svg/Medium.svg" alt="Medium" width={20} height={20} className="w-5 h-5 dark:invert" />
               </a>
             </div>
-          </motion.div>
+          </div>
 
           {/* Right Column: Interactive Tabbed Code Block */}
           <motion.div

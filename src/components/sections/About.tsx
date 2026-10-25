@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const techStack = [
   { name: 'Laravel / PHP', svg: '/portfolio/svg/Laravel.svg' },
@@ -45,11 +46,12 @@ export default function About() {
             className="w-full lg:w-5/12 relative"
           >
             <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-100 dark:border-gray-800 hover:shadow-primary/20 transition-all duration-500 group">
-              <img
+              <Image
                 src="/portfolio/images/avatar/developer-avatar.webp"
                 alt="David Washington Kamau Portrait"
+                width={500}
+                height={600}
                 className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="lazy"
               />
             </div>
 
@@ -77,7 +79,7 @@ export default function About() {
             </div>
 
             <h2 className="text-3xl md:text-4xl font-bold font-display mb-2 text-gray-900 dark:text-white">About Me</h2>
-            <h4 className="text-xl text-primary font-medium mb-6">AWS Certified Solutions Architect &amp; Full-Stack Developer</h4>
+            <h3 className="text-xl text-primary font-medium mb-6">AWS Certified Solutions Architect &amp; Full-Stack Developer</h3>
 
             <p className="text-lg text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
               I am a <strong className="text-gray-900 dark:text-gray-200">Full-Stack Software Developer</strong> currently building enterprise web applications and business systems at <strong className="text-gray-900 dark:text-gray-200">SoftClans Technologies</strong>.
@@ -98,7 +100,7 @@ export default function About() {
                     className="flex items-center gap-2 px-3 py-1.5 bg-gray-50 dark:bg-gray-800 rounded-lg text-xs font-medium border border-gray-100 dark:border-gray-700 shadow-sm"
                   >
                     <div className="w-5 h-5 flex items-center justify-center">
-                      <img src={tech.svg} alt={tech.name} className="w-4 h-4 object-contain" />
+                      <Image src={tech.svg} alt={tech.name} width={16} height={16} className="w-4 h-4 object-contain" />
                     </div>
                     <span className="text-gray-700 dark:text-gray-300 font-medium">{tech.name}</span>
                   </motion.div>

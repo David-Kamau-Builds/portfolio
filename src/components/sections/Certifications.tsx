@@ -6,6 +6,7 @@ import CertModal from '@/components/ui/CertModal';
 import CertCarousel from '@/components/ui/CertCarousel';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const filterCategories = ['All', 'AWS', 'Linux Foundation', 'Google Cloud', 'HashiCorp', 'Other'];
 
@@ -84,7 +85,7 @@ export default function Certifications({ isFullPage = false }: CertificationsPro
                       {cert.issuer}
                     </span>
                   )}
-                  <img src={cert.image} alt={cert.title} className="max-h-full object-contain group-hover:scale-105 transition-transform duration-300" />
+                  <Image src={cert.image} alt={cert.title} width={160} height={160} className="max-h-full w-auto object-contain group-hover:scale-105 transition-transform duration-300" />
                 </div>
                 
                 <div className="p-6 flex flex-col flex-grow">
